@@ -1,43 +1,42 @@
 import React from 'react'
-import { ShoppingCartIcon, SearchIcon } from '@heroicons/react/outline'
+import { ShoppingBagIcon, SearchIcon, MenuIcon } from '@heroicons/react/outline'
 import legoLogo from '../png/Lego-logo.png'
+import legoHead from '../png/legoHead.png'
 
 export default function Navbar() {
     return (
-        <header className='fixed top-0 flex flex-row w-full h-20 justify-between items-center px-28 bg-yellow-400 text-black text-md'>
-            <div className='flex flex-row items-center'>
-                <a href="/">
-                    <img src={ legoLogo } className='h-14 w-22 mx-4' alt="Lego logo" />
-                </a>
-                <button className='mx-1'>
-                    <SearchIcon className='h-8 w-8 px-1 py-1 bg-white text-black rounded-full' />
-                </button>
-            </div>
-            <nav>
-                <ul className="flex flex-row justify-evenly items-center">
-                    <li>
-                        <a className='font-medium mx-4 hover:underline underline-offset-8 decoration-2' href="/shop">SHOP</a>
-                    </li>
-                    <li>
-                        <a className='font-medium mx-7 hover:underline underline-offset-8 decoration-2' href="/watchlist">WATCHLIST</a>
-                    </li>
-                    <li>
-                        <BlueBtn text={ 'contact' } />
-                    </li>
-                    <li className='relative'>
-                        <a href="/cart">
-                            <ShoppingCartIcon className='h-7 w-7 mx-3 my-1'/> 
+        <header className='flex flex-row items-center h-14 w-full bg-white border-b-2 border-yellow-300'>
+            <nav className='w-full flex flex-row justify-between mx-6'>
+                <ul className='flex flex-row items-center'>
+                    <li className='relative flex flex-col items-center mx-2'>
+                        <a href="/">
+                            <MenuIcon className='h-6 w-6'/>
                         </a>
-                        <div className='flex flex-row justify-center items-center absolute top-0 right-1 h-4 w-4 rounded-full bg-red-600 text-white'>
-                            <small>0</small>
-                        </div>
+                        <small className='text-xxs'>MENU</small>
+                    </li>
+                    <li>
+                        <a href="/">
+                            <img className='h-10 w-18' src={ legoLogo } alt="Lego logo" />
+                        </a>
+                    </li>
+                </ul>
+                <ul className='flex flex-row items-center'>
+                    <li className='flex flex-row items-center mx-2'>
+                        <button><SearchIcon className='h-14 w-5' /></button>
+                    </li>
+                    <li className='flex flex-row items-center justify-center mx-2'>
+                        <a href="/">
+                            <img class='h-6 w-6' src={ legoHead } alt="" />
+                        </a>
+                    </li>
+                    <li className='relative flex flex-row items-center justify-center mx-2'>
+                        <a className='flex flex-col items-center' href="/">
+                            <ShoppingBagIcon className='h-14 w-6'/>
+                        </a>
+                        <small className='absolute bottom-0'>0</small>
                     </li>
                 </ul>
             </nav>
         </header>
     )
 }
-
-const BlueBtn = ({ text }) => {
-    return <a className='blue-btn' href="/contact">{ text }</a>
-}; 
