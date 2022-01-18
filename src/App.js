@@ -1,5 +1,6 @@
 import './App.css';
 import Navbar from './components/Navbar';
+import millennium from './png/millennium.png'
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <button>Shop now</button>
         </div> */}
       </div>
+      <img className='w-full mt-14' src={ millennium } alt="" />
     </>
   );
 }
