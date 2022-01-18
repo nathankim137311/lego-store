@@ -11,6 +11,9 @@
   .sidebar-link {
     @apply shadow-sm px-6 py-2 border-b-1 border-gray-200;
   }
+  .sidebar-header {
+    @apply flex flex-row justify-between items-center h-14 w-full border-b-3 border-yellow-300;
+  }
   .fade-screen {
     @apply absolute block w-full h-full bg-black;
   }
@@ -18,6 +21,3 @@
     @apply flex flex-row items-center p-2 rounded-full bg-white shadow-md;
   }
 }
-
-/* add fadeScreen
-add searchbar */

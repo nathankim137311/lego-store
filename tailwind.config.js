@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -23,6 +25,10 @@ module.exports = {
       '3': '3px',      
       '4': '4px',      
       '6': '6px',
+    },
+    screens: {
+      'xs': '360px',
+      ...defaultTheme.screens,
     },
     extend: {},
   },

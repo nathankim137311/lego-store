@@ -9,8 +9,11 @@ export default function Sidebar( props ) {
     return (
         <>
             <div className={ props.isActive ? 'fade-screen opacity-50 transition-opacity ease-in-out duration-300 z-2 top-0' : 'fade-screen opacity-0 z-2'}></div>
-            <div className={ props.isActive ? 'fixed left-0 top-0 h-full bg-white text-black w-1/3 z-3 transition-all ease-in-out duration-300' : 'absolute -left-1/3 top-0 h-full bg-white text-black w-1/3 z-3' }>
-                <div className='flex flex-row justify-between items-center h-14 w-full border-b-3 border-yellow-300'>
+            <div className={ props.isActive ? 
+            'fixed left-0 top-0 h-full xs:w-full sm:w-1/3 bg-white text-black z-3 transition-all ease-in-out duration-300' 
+            : 
+            'absolute xs:-left-1/2 sm:-left-1/3 top-0 h-full bg-white text-black w-1/3 z-3' }>
+                <div className='sidebar-header'>
                     <h2 className='px-6'>MENU</h2>
                     <button className='px-6' onClick={ handleClose }>
                         <XIcon className='w-6 h-6'/>
