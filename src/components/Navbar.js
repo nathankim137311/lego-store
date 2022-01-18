@@ -1,13 +1,19 @@
 import React, { useState } from 'react'
 import { ShoppingBagIcon, SearchIcon, MenuIcon } from '@heroicons/react/outline'
+import { XIcon } from '@heroicons/react/solid'
 import legoLogo from '../png/Lego-logo.png'
 import legoHead from '../png/legoHead.png'
 import Sidebar from './Sidebar'
 
 export default function Navbar() {
     const [isActive, setActive] = useState(false); 
+    const [isSearch, setSearch] = useState(false); 
     const handleClick = () => {
         setActive(true);
+    }
+
+    const handleSearch = () => {
+        setSearch(!isSearch);
     }
 
     return (
@@ -29,7 +35,18 @@ export default function Navbar() {
                     </ul>
                     <ul className='flex flex-row items-center'>
                         <li className='flex flex-row items-center mx-2'>
-                            <button><SearchIcon className='h-14 w-5' /></button>
+                            <button className={ isSearch ? 'hidden' : '' } onClick={ handleSearch }>
+                                <SearchIcon className='h-14 w-5' />
+                            </button>
+                            <div className={ isSearch ? 'flex flex-row items-center p-2 rounded-full bg-white shadow-md' : 'hidden' }>
+                                <button>
+                                    <SearchIcon className='h-5 w-5 mr-2' />
+                                </button>
+                                <input className='bg-white h-6' type="text" name="search" placeholder="Search..."/>
+                                <button onClick={ handleSearch }>
+                                    <XIcon className='w-5 h-5 ml-2' />
+                                </button>
+                            </div>
                         </li>
                         <li className='flex flex-row items-center justify-center mx-2'>
                             <a href="/">
