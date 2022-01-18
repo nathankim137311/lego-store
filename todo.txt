@@ -1,0 +1,10 @@
+// 1/17/2022 Fully-Functional Navbar and Sidebar 
+    Clean up code
+    Add custom utility classes 
+    add functionality 
+        smooth css animations 
+        buttons / links route to different pages or toggles animations
+    media queries 
+        responsive design 
+        mobile-first development 
+

@@ -7,5 +7,5 @@
   .blue-btn {
     @apply flex flex-row items-center bg-blue-500 rounded-2xl mx-4 py-1 font-bold px-4 text-white
            hover:bg-blue-400;
-  }
+  },
 }
