@@ -8,7 +8,7 @@ export default function Sidebar( props ) {
 
     return (
         <>
-            <div className={ props.isActive ? 'absolute top-0 block w-full h-full bg-black opacity-50 z-2 transition-opacity ease-in-out duration-300' : 'absolute block w-full h-full bg-white opacity-0 z-2'}></div>
+            <div className={ props.isActive ? 'fade-screen opacity-50 transition-opacity ease-in-out duration-300 z-2 top-0' : 'fade-screen opacity-0 z-2'}></div>
             <div className={ props.isActive ? 'fixed left-0 top-0 h-full bg-white text-black w-1/3 z-3 transition-all ease-in-out duration-300' : 'absolute -left-1/3 top-0 h-full bg-white text-black w-1/3 z-3' }>
                 <div className='flex flex-row justify-between items-center h-14 w-full border-b-3 border-yellow-300'>
                     <h2 className='px-6'>MENU</h2>

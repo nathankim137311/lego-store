@@ -38,15 +38,7 @@ export default function Navbar() {
                             <button className={ isSearch ? 'hidden' : '' } onClick={ handleSearch }>
                                 <SearchIcon className='h-14 w-5' />
                             </button>
-                            <div className={ isSearch ? 'flex flex-row items-center p-2 rounded-full bg-white shadow-md' : 'hidden' }>
-                                <button>
-                                    <SearchIcon className='h-5 w-5 mr-2' />
-                                </button>
-                                <input className='bg-white h-6' type="text" name="search" placeholder="Search..."/>
-                                <button onClick={ handleSearch }>
-                                    <XIcon className='w-5 h-5 ml-2' />
-                                </button>
-                            </div>
+                            <SearchBar isSearch={ isSearch } handleSearch={ handleSearch } />
                         </li>
                         <li className='flex flex-row items-center justify-center mx-2'>
                             <a href="/">
@@ -64,5 +56,19 @@ export default function Navbar() {
             </header>
             <Sidebar isActive={ isActive } setActive={ setActive } />
         </>
+    )
+}
+
+const SearchBar = (props) => {
+    return (
+        <div className={ props.isSearch ? 'search-bar' : 'hidden' }>
+            <button>
+                <SearchIcon className='h-5 w-5 mr-2' />
+            </button>
+            <input className='bg-white h-6' type="text" name="search" placeholder="Search..."/>
+            <button onClick={ props.handleSearch }>
+                <XIcon className='w-5 h-5 ml-2' />
+            </button>
+        </div>
     )
 }
