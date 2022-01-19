@@ -8,7 +8,7 @@ export default function Sidebar( props ) {
 
     return (
         <>
-            <div className={ props.isActive ? 'fade-screen opacity-50 transition-opacity ease-in-out duration-300 z-2 top-0' : 'fade-screen opacity-0 z-2'}></div>
+            <div className={ props.isActive ? 'fade-screen opacity-50 transition-all ease-in-out duration-300 z-2 top-0' : 'hidden'}></div>
             <div className={ props.isActive ? 
             'fixed left-0 top-0 h-full xs:w-full sm:w-1/3 bg-white text-black z-3 transition-all ease-in-out duration-300' 
             : 

@@ -18,6 +18,7 @@
     @apply absolute block w-full h-full bg-black;
   }
   .search-bar {
-    @apply flex flex-row items-center p-2 rounded-full bg-white shadow-md;
+    @apply flex flex-row items-center p-2 rounded-full bg-white shadow-md 
+           /* xs:absolute xs:top-24 xs:left-1/2 xs:-translate-x-1/2 */
   }
 }

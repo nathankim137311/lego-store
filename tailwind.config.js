@@ -28,6 +28,7 @@ module.exports = {
     },
     screens: {
       'xs': '360px',
+      'sm': '575px', 
       ...defaultTheme.screens,
     },
     extend: {},

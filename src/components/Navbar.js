@@ -18,7 +18,7 @@ export default function Navbar() {
 
     return (
         <>
-            <header className='fixed top-0 flex flex-row items-center xs:h-14 md:h-16 lg:h-20 w-full xs:bg-white lg:bg-yellow-300 xs:border-b-2 xs:border-yellow-300 z-1'>
+            <header className='fixed top-0 flex flex-row items-center xs:h-14 md:h-16 lg:h-20 w-full xs:bg-white lg:bg-yellow-300 xs:border-b-2 xs:border-yellow-300'>
                 <nav className='w-full flex flex-row justify-between xs:mx-6 md:mx-14 lg:mx-22 xl:mx-28'>
                     <ul className='flex flex-row items-center'>
                         <li className='relative flex flex-col items-center mx-2 lg:hidden'>

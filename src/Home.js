@@ -1,8 +1,8 @@
-import './App.css';
+import './home.css';
 import Navbar from './components/Navbar';
-import millennium from './png/millennium.png'
+import millennium from './png/millennium.png';
 
-function App() {
+export default function Home() {
   return (
     <>
       <Navbar />
@@ -17,5 +17,3 @@ function App() {
     </>
   );
 }
-
-export default App;

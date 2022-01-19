@@ -8,3 +8,26 @@
         responsive design 
         mobile-first development 
 
+// 1/18/2022 Routing 
+    install react-router dom 
+    routes for: 
+        home: 
+            landing page of website with a banner image of featured product
+            various categories: available now, on sale, coming-soon 
+        shop: (first)
+            fetch all products from api
+            a grid of all the products
+            functionality to filter products
+            each product will have a card, with the picture of the product 
+            the title, price, buy now button, and a add to cart button. 
+        watchlist: 
+            functionality to add products into list and get notified whenever the 
+            product goes on sale or the price dips below a certain amount. 
+        contact: 
+            a basic contact form for users to input their name, email and a message 
+        shopping bag:
+            a basic shopping cart functionality 
+            ability to add and remove items 
+            ability to specifiy the quantity of items
+
+
