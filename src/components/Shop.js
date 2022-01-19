@@ -11,14 +11,13 @@ export default function Shop() {
     }, []);
 
     const fetchProducts = async () => {
-        let products = await fetch("https://lego-star-wars-sets.p.rapidapi.com/api/products?page=1&limit=8", 
-            {
+        let products = await fetch("https://lego-star-wars-sets.p.rapidapi.com/api/products?page=1&limit=8", {
             "method": "GET",
             "headers": {
                 "x-rapidapi-host": "lego-star-wars-sets.p.rapidapi.com",
                 "x-rapidapi-key": "76acaf4aaamshdc4d06215addb4ap16e33cjsn782c56471964"
-                }
-            })
+            }
+        });
         products = await products.json();
         setProducts(products.products);
     }
