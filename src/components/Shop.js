@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import Navbar from './Navbar'
 import starwarsLogo from '../png/starwars-logo.png'
-import { v4 as uuidv4 } from 'uuid';
+import ProductCard from './ProductCard';
 
 export default function Shop() {
     const [products, setProducts] = useState([]);
@@ -32,19 +32,7 @@ export default function Shop() {
             </div>
             <div className='absolute top-1/2 p-2 w-full grid xs:grid-cols-2'>
                 {products.map(product => {
-                    return (
-                        <div className='flex flex-col items-center' key={uuidv4()}>
-                            <a className='flex flex-row items-center justify-center h-36 w-full pt-2' href="">
-                                <img className='w-full h-full object-contain' src={product.images[0].split('?')[0]} alt={product.set} />
-                            </a>
-                            <div className='flex flex-col items-center w-full p-2'>
-                                <a className='text-left h-14 w-full' href="">{product.set}</a>
-                                <span className='text-left w-full'>{Math.round(product.rating * 10) / 10} / 5</span>
-                                <span className='text-left w-full font-semibold mt-2 mb-2'>${product.price}.99</span>
-                                <button className='h-12 w-full bg-orange-400 rounded-md text-sm font-medium mb-2'>Add to Bag</button>
-                            </div>
-                        </div>
-                    )
+                    return <ProductCard product={product} />
                 })}
             </div>
             <Navbar />
