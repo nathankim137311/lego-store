@@ -19,7 +19,6 @@
   }
   .search-bar {
     @apply flex flex-row items-center p-2 rounded-full bg-white shadow-md;
-           /* xs:absolute xs:top-24 xs:left-1/2 xs:-translate-x-1/2 */
   }
   .orange-btn {
     @apply h-12 w-full bg-orange-400 rounded-md text-sm font-medium

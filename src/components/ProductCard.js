@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function ProductCard({ product }) {
     return (
-        <div className='flex flex-col items-center xl:my-2 xl:mx-2' key={product.item_id}>
+        <div className='flex flex-col items-center xl:my-2 2xl:my-12 xl:mx-2' key={product.item_id}>
             <Link className='flex flex-row items-center justify-center h-36 w-full pt-2' to={`/shop/${product.item_id}`}>
                 <img className='w-full h-full object-contain' src={product.images[0].split('?')[0]} alt={product.set} />
             </Link>

@@ -6,24 +6,26 @@ export default function Carousel( props ) {
     const images = props.product.images.map(image => image.split('?')[0]);
 
     return (
-        <div className='p-4 mt-2'>
+        <div className='xxs:p-4 xxs:mt-2 lg:mt-0 lg:pt-0 sm:p-6 lg:w-full lg:px-32'>
             {/* build image carousel */}
-            <div className='bg-white h-72 w-full'>
-                <img className='w-full h-full object-contain' src={images[0]} alt="" />
-            </div>
-            <div>
-                <div className='flex flex-row justify-between'>
-                    <h1 className='text-xl'>{props.product.set}</h1>
-                    <img className='xxs:h-16 xxs:w-28' src={starwarsLogo} alt="" />
+            <div className='xxs:flex xxs:flex-col lg:flex lg:flex-row'>
+                <div className='lg:flex lg:flex-row lg:justify-center lg:items-center bg-white xx:h-72 lg:h-78 xxs:w-full xxs:max-w-3xl lg:max-w-6xl lg:border-t-1 lg:border-gray-300'>
+                    <img className='w-full h-full xxs:object-contain lg:w-4/6 lg:my-16' src={images[0]} alt="" />
                 </div>
-                <h2 className='text-xl font-bold'>${props.product.price}.99</h2>
-                {/* different colors for availability add later */}
-                <h2>{props.product.availability}</h2> 
-                <h2>Rating: {Math.round(props.product.rating * 10) / 10} / 5</h2>
-                <QuantitySelector /> 
-                <button className='orange-btn'>Add to Bag</button>
-                <ProductDetail ages={props.product.ages} pieces={props.product.pieces} item={props.product.item_id} />
+                <div className='xxs:mt-3 lg:mt-0 lg:border-t-1 lg:border-gray-300 lg:pt-4 lg:w-1/2'>
+                    <div className='flex flex-row justify-between'>
+                        <h1 className='xxs:text-xl sm:text-2xl sm:font-medium'>{props.product.set}</h1>
+                        <img className='xxs:h-16 xxs:w-28' src={starwarsLogo} alt="" />
+                    </div>
+                    <h2 className='xxs:text-xl sm:text-2xl lg:mt-12 font-bold'>${props.product.price}.99</h2>
+                    {/* different colors for availability add later */}
+                    <small className='text-sm'>{props.product.availability}</small> 
+                    <h2>Rating: {Math.round(props.product.rating * 10) / 10} / 5</h2>
+                    <QuantitySelector /> 
+                    <button className='orange-btn'>Add to Bag</button>
+                </div>
             </div>
+            <ProductDetail ages={props.product.ages} pieces={props.product.pieces} item={props.product.item_id} />
         </div>
     )
 }
