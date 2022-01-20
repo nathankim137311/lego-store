@@ -1,5 +1,6 @@
 import React from 'react'
 import { XIcon } from '@heroicons/react/solid'
+import { Link } from 'react-router-dom';
 
 export default function Sidebar( props ) {
     const handleClose = () => {
@@ -21,22 +22,22 @@ export default function Sidebar( props ) {
                 </div>
                 <ul className='mt-2'>
                     <li className='sidebar-link'>
-                        <a className='text-sm' href="/home">HOME</a>
+                        <Link className='text-sm' to='/'>HOME</Link>
                     </li>
                     <li className='sidebar-link'>
-                        <a className='text-sm' href="/shop">SHOP</a>
+                        <Link className='text-sm' to='/shop'>SHOP</Link>
                     </li>
                     <li className='sidebar-link'>
-                        <a className='text-sm' href="/watchlist">WATCHLIST</a>
+                        <Link className='text-sm' to='/watchlist'>WATCHLIST</Link>
                     </li>
                     <li className='sidebar-link'>
-                        <a className='text-sm' href="/contact">CONTACT</a>
+                        <Link className='text-sm' to='/contact'>CONTACT</Link>
                     </li>
                     <li className='sidebar-link'>
-                        <a className='text-xs' href="/shopping-bag">
+                        <Link className='text-xs' to='/shopping-bag'>
                             Shopping Bag
                             (<small>0</small>)
-                        </a>
+                        </Link>
                     </li>
                 </ul>
             </div>

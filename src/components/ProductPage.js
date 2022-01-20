@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 import Navbar from './Navbar';
-import Carousel from './Carousel';
+import ProductDetails from './ProductDetails';
 import { Link } from 'react-router-dom';
 
 export default function ProductPage() {
@@ -32,7 +32,7 @@ export default function ProductPage() {
                 </Link>
                 <h3>{product.length === 0 ? console.log('loading...') : product[0].set}</h3>
             </div>
-            {product.length === 0 ? console.log('loading...') : <Carousel product={product[0]} />}
+            {product.length === 0 ? console.log('loading...') : <ProductDetails product={product[0]} />}
             <Navbar />
         </>
     )
