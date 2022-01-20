@@ -5,4 +5,5 @@ https://coder-coder.com/z-index-isnt-working/
 // fit images in container 
 set width and height to 100% and add object-fit: contain
 
-// infinite scrolling with react 
+// smallest screen size to develop for 
+exactly 320px 

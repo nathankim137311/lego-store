@@ -7,13 +7,14 @@ export default function Carousel( props ) {
 
     return (
         <div className='p-4 mt-2'>
+            {/* build image carousel */}
             <div className='bg-white h-72 w-full'>
                 <img className='w-full h-full object-contain' src={images[0]} alt="" />
             </div>
             <div>
                 <div className='flex flex-row justify-between'>
                     <h1 className='text-xl'>{props.product.set}</h1>
-                    <img className='xs:h-16 xs:w-28' src={starwarsLogo} alt="" />
+                    <img className='xxs:h-16 xxs:w-28' src={starwarsLogo} alt="" />
                 </div>
                 <h2 className='text-xl font-bold'>${props.product.price}.99</h2>
                 {/* different colors for availability add later */}

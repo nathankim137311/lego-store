@@ -10,9 +10,9 @@ export default function Sidebar( props ) {
         <>
             <div className={ props.isActive ? 'fade-screen opacity-50 transition-all ease-in-out duration-300 z-2 top-0' : 'hidden'}></div>
             <div className={ props.isActive ? 
-            'fixed left-0 top-0 h-full xs:w-full sm:w-1/3 bg-white text-black z-3 transition-all ease-in-out duration-300' 
+            'fixed left-0 top-0 h-full xxs:w-full sm:w-1/3 bg-white text-black z-3 transition-all ease-in-out duration-300' 
             : 
-            'absolute xs:-left-1/2 sm:-left-1/3 top-0 h-full bg-white text-black w-1/3 z-3' }>
+            'absolute xxs:-left-1/2 sm:-left-1/3 top-0 h-full bg-white text-black w-1/3 z-3' }>
                 <div className='sidebar-header'>
                     <h2 className='px-6'>MENU</h2>
                     <button className='px-6' onClick={ handleClose }>

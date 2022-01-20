@@ -9,6 +9,8 @@
         mobile-first development 
 
 // 1/18/2022 Routing 
+https://github.com/remix-run/react-router/blob/main/docs/getting-started/tutorial.md
+https://tailwindcss.com/docs
     install react-router dom 
     routes for: 
         home: 

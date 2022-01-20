@@ -32,7 +32,6 @@ export default function ProductPage() {
                 </Link>
                 <h3>{product.length === 0 ? console.log('loading...') : product[0].set}</h3>
             </div>
-            {/* <h1 className='absolute top-20 left-1/2 -translate-x-1/2'>{product.length === 0 ? console.log('loading...') : product[0].set}</h1> */}
             {product.length === 0 ? console.log('loading...') : <Carousel product={product[0]} />}
             <Navbar />
         </>

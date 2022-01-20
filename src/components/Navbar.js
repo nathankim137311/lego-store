@@ -18,8 +18,8 @@ export default function Navbar() {
 
     return (
         <>
-            <header className='fixed top-0 flex flex-row items-center xs:h-14 md:h-16 lg:h-20 w-full xs:bg-white lg:bg-yellow-300 xs:border-b-2 xs:border-yellow-300'>
-                <nav className='w-full flex flex-row justify-between xs:mx-6 md:mx-14 lg:mx-22 xl:mx-28'>
+            <header className='fixed top-0 flex flex-row items-center xxs:h-14 md:h-16 lg:h-20 w-full xxs:bg-white lg:bg-yellow-300 xxs:border-b-2 xxs:border-yellow-300'>
+                <nav className='w-full flex flex-row justify-between xxs:mx-6 md:mx-14 lg:mx-22 xl:mx-28'>
                     <ul className='flex flex-row items-center'>
                         <li className='relative flex flex-col items-center mx-2 lg:hidden'>
                             <button onClick={ handleClick }>
@@ -29,12 +29,12 @@ export default function Navbar() {
                         </li>
                         <li>
                             <a href="/">
-                                <img className='xs:h-10 xs:w-18 lg:h-14 lg:w-24' src={ legoLogo } alt="Lego logo" />
+                                <img className='xxs:h-10 xxs:w-18 lg:h-14 lg:w-24' src={ legoLogo } alt="Lego logo" />
                             </a>
                         </li>
                     </ul>
                     <ul className='flex flex-row items-center'>
-                        <div className='xs:hidden lg:flex flex-row items-center'>
+                        <div className='xxs:hidden lg:flex flex-row items-center'>
                             <li className='mx-3 lg:text-base font-medium'>
                                 <a href="/shop">SHOP</a>
                             </li>
@@ -45,26 +45,26 @@ export default function Navbar() {
                                 <a href="/contact">Contact</a>
                             </li>
                         </div>
-                        <li className='flex flex-row items-center xs:mx-2 lg:mx-3'>
+                        <li className='flex flex-row items-center xxs:mx-2 lg:mx-3'>
                             <button className={ isSearch ? 'hidden' : '' } onClick={ handleSearch }>
-                                <div className='flex flex-row justify-center items-center p-2 xs:bg-yellow-300 lg:bg-white rounded-full'>
-                                    <SearchIcon className='xs:h-5 xs:w-5 lg:h-6 lg:w-6' />
+                                <div className='flex flex-row justify-center items-center p-2 xxs:bg-yellow-300 lg:bg-white rounded-full'>
+                                    <SearchIcon className='xxs:h-5 xxs:w-5 lg:h-6 lg:w-6' />
                                 </div>
                             </button>
                             <SearchBar isSearch={ isSearch } handleSearch={ handleSearch } />
                         </li>
-                        <li className='flex flex-row items-center justify-center xs:mx-2 lg:mx-3'>
+                        <li className='flex flex-row items-center justify-center xxs:mx-2 lg:mx-3'>
                             <a href="/">
-                                <div className='flex flex-row justify-center items-center p-2 xs:bg-blue-300 lg:bg-white rounded-full'>
-                                    <img className='xs:h-5 xs:w-5 lg:h-6 lg:w-6' src={ legoHead } alt="" />
+                                <div className='flex flex-row justify-center items-center p-2 xxs:bg-blue-300 lg:bg-white rounded-full'>
+                                    <img className='xxs:h-5 xxs:w-5 lg:h-6 lg:w-6' src={ legoHead } alt="" />
                                 </div>
                             </a>
                         </li>
-                        <li className='relative flex flex-row items-center justify-center xs:mx-2 lg:mx-3'>
+                        <li className='relative flex flex-row items-center justify-center xxs:mx-2 lg:mx-3'>
                             <a className='flex flex-col items-center' href="/">
-                                <ShoppingBagIcon className='xs:h-14 xs:w-6 lg:h-14 lg:w-7'/>
+                                <ShoppingBagIcon className='xxs:h-14 xxs:w-6 lg:h-14 lg:w-7'/>
                             </a>
-                            <small className='absolute bottom-0 xs:text-xs lg:text-sm'>0</small>
+                            <small className='absolute bottom-0 xxs:text-xs lg:text-sm'>0</small>
                         </li>
                     </ul>
                 </nav>
