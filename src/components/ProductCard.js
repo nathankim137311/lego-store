@@ -13,7 +13,7 @@ export default function ProductCard({ product }) {
                 </Link>
                 <span className='text-left w-full'>{Math.round(product.rating * 10) / 10} / 5</span>
                 <span className='text-left w-full font-semibold mt-2 mb-2'>${product.price}.99</span>
-                <button className='h-12 w-full bg-orange-400 rounded-md text-sm font-medium mb-2'>Add to Bag</button>
+                <button className='orange-btn mb-2'>Add to Bag</button>
             </div>
         </div>
     )

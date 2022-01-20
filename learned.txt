@@ -1,5 +1,6 @@
 // stacking elements and css 
 elements placed after other elements will go on the top of the stack 
+https://coder-coder.com/z-index-isnt-working/
 
 // fit images in container 
 set width and height to 100% and add object-fit: contain

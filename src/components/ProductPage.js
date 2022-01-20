@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router';
 import Navbar from './Navbar';
+import Carousel from './Carousel';
+import { Link } from 'react-router-dom';
 
 export default function ProductPage() {
     const [product, setProduct] = useState([]);
@@ -24,7 +26,14 @@ export default function ProductPage() {
     }
     return (
         <>
-            <h1 className='absolute top-24 left-1/2 -translate-x-1/2'>{product[0].set}</h1>
+            <div className='flex flex-row mt-16 w-full p-4 text-sm'>
+                <Link className='text-blue-400 mr-2' to='/shop'>
+                    <h3>Shop &gt;</h3>
+                </Link>
+                <h3>{product.length === 0 ? console.log('loading...') : product[0].set}</h3>
+            </div>
+            {/* <h1 className='absolute top-20 left-1/2 -translate-x-1/2'>{product.length === 0 ? console.log('loading...') : product[0].set}</h1> */}
+            {product.length === 0 ? console.log('loading...') : <Carousel product={product[0]} />}
             <Navbar />
         </>
     )
