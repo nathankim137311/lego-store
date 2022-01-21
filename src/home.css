@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* customize your own CSS utility classes */
+@layer components { 
+  .blue-btn {
+    @apply flex flex-row items-center bg-blue-500 rounded-2xl mx-4 py-1 font-bold px-4 text-white
+           hover:bg-blue-400;
+  }
+  .sidebar-link {
+    @apply shadow-sm px-6 py-2 border-b-1 border-gray-200;
+  }
+  .sidebar-header {
+    @apply flex flex-row justify-between items-center h-14 w-full border-b-3 border-yellow-300;
+  }
+  .fade-screen {
+    @apply absolute block w-full h-full bg-black;
+  }
+  .search-bar {
+    @apply flex flex-row items-center p-2 rounded-full bg-white shadow-md;
+  }
+  .orange-btn {
+    @apply h-12 w-full bg-orange-400 rounded-md text-sm font-medium
+           hover:bg-white hover:border-2 hover:border-orange-400 
+  }
+}
