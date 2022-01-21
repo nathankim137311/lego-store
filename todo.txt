@@ -33,5 +33,14 @@ https://tailwindcss.com/docs
             ability to specifiy the quantity of items
 
 // 1/18/2022 update webscraper
+    images are blurry, need to get rid of everything after '?'
+    remove data from mongodb Atlas 
+    scrape lego.com
+    commit and push changes
+    re-deploy onto heroku 
+    update RapidAPI
+
+
+
 
 

@@ -1,15 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { PlusIcon, MinusIcon, CakeIcon, OfficeBuildingIcon, HashtagIcon } from '@heroicons/react/outline'
 import starwarsLogo from '../png/starwars-logo.png'
 
-export default function Carousel( props ) {
+export default function ProductDetails( props ) {
     const images = props.product.images.map(image => image.split('?')[0]);
 
     return (
         <div className='xxs:p-4 xxs:mt-2 lg:mt-0 lg:pt-0 sm:p-6 lg:w-full lg:px-32'>
             {/* build image carousel */}
             <div className='xxs:flex xxs:flex-col lg:flex lg:flex-row'>
-                <div className='lg:flex lg:flex-row lg:justify-center lg:items-center bg-white xx:h-72 lg:h-78 xxs:w-full xxs:max-w-3xl lg:max-w-6xl lg:border-t-1 lg:border-gray-300'>
+                <div className='lg:flex lg:flex-row lg:justify-center lg:items-center bg-white lg:h-78 xxs:w-full xxs:max-w-3xl lg:max-w-6xl lg:border-t-1 lg:border-gray-300'>
                     <img className='w-full h-full xxs:object-contain lg:w-4/6 lg:my-16' src={images[0]} alt="" />
                 </div>
                 <div className='xxs:mt-3 lg:mt-0 lg:border-t-1 lg:border-gray-300 lg:pt-4 lg:w-1/2'>
@@ -31,15 +31,31 @@ export default function Carousel( props ) {
 }
 
 const QuantitySelector = () => {
+    const [quantity, setQuantity] = useState(1);
+    
+    const handleIncrement = () => {
+        console.log('increment!');
+    }
+
+    const handleDecrement = () => {
+        console.log('decrement!');
+    }
+
     return (
         <div className='flex flex-row justify-start w-fit rounded-md border-1 border-gray-300 my-4'>
-            <button className='flex flex-row justify-center items-center h-12 w-12'>
+            <button 
+            className='flex flex-row justify-center items-center h-12 w-12'
+            onClick={handleDecrement}
+            >
                 <MinusIcon className='h-4 w-4' />
             </button>
             <div className='flex flex-row justify-center items-center w-24 border-x-1 border-gray-300'>
-                <span>1</span>
+                <span>{quantity}</span>
             </div>
-            <button className='flex flex-row justify-center items-center h-12 w-12'>
+            <button 
+            className='flex flex-row justify-center items-center h-12 w-12'
+            onClick={handleIncrement}
+            >
                 <PlusIcon className='h-4 w-4' />
             </button>
         </div>
