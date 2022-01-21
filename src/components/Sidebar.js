@@ -1,8 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { XIcon } from '@heroicons/react/solid'
 import { Link } from 'react-router-dom';
+import { BagContext } from './BagContext';
 
 export default function Sidebar( props ) {
+    const {bagArr} = useContext(BagContext); 
+    const [bag] = bagArr;
     const handleClose = () => {
         props.setActive(false);
     }
@@ -36,7 +39,7 @@ export default function Sidebar( props ) {
                     <li className='sidebar-link'>
                         <Link className='text-xs' to='/shopping-bag'>
                             Shopping Bag
-                            (<small>0</small>)
+                            (<small>{bag.length}</small>)
                         </Link>
                     </li>
                 </ul>

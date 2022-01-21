@@ -3,9 +3,23 @@ import { Link } from 'react-router-dom';
 
 export default function ProductCard({ product, bag, setBag }) {
     const addToBag = () => {
-        const newBag = [...bag];
-        newBag.push(product);
-        setBag(newBag); 
+        // push product to array if specific product doesn't exist else increment product quantity by one
+        const bagItem = [...bag].find(item => item.item_id === product.item_id);
+
+        if (bagItem !== undefined) {
+            const newBag = [...bag].map(item => {
+                if (item.item_id === product.item_id) {
+                    item.quantity += 1; 
+                }
+
+                return item; 
+            });
+            setBag(newBag);
+        } else {
+            const newBag = [...bag];
+            newBag.push(product);
+            setBag(newBag); 
+        }
     }
 
     return (

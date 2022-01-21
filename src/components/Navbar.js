@@ -10,7 +10,7 @@ export default function Navbar() {
     const [isActive, setActive] = useState(false); 
     const [isSearch, setSearch] = useState(false); 
     const {bagArr} = useContext(BagContext); 
-    const [bag, setBag] = bagArr;
+    const [bag] = bagArr;
 
     const handleClick = () => {
         setActive(true);
