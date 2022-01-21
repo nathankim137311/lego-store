@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom';
 import { BagContext } from './BagContext';
 
@@ -6,6 +6,17 @@ export default function ProductCard({ product }) {
     const {bagArr, totalItemsValue} = useContext(BagContext); 
     const [bag, setBag] = bagArr;
     const [totalItems, setTotalItems] = totalItemsValue;
+
+    useEffect(() => {
+        const sumQauntity = () => {
+            if (bag.length !== 0) {
+                const total = [...bag].reduce((prev, curr) => prev + curr.quantity, 0);
+                setTotalItems(total); 
+            } 
+        }
+
+        sumQauntity();
+    }, [totalItems, bag, setTotalItems])
 
     const addToBag = () => {
         // push product to array if specific product doesn't exist else increment product quantity by one
@@ -15,7 +26,6 @@ export default function ProductCard({ product }) {
             const newBag = [...bag];
             newBag.push(product);
             setBag(newBag);
-            total(); 
         } else {
             const newBag = [...bag].map(item => {
                 if (item.item_id === product.item_id) {
@@ -25,18 +35,7 @@ export default function ProductCard({ product }) {
                 return item; 
             });
             setBag(newBag);
-            total();
         }
-    }
-
-    // sum quantity property
-    const total = () => {
-        if (bag.length !== 0) {
-            const total = [...bag].reduce((prev, current) => {
-                return prev + current.quantity;
-            }, 1);
-            setTotalItems(total); 
-        } 
     }
 
     return (

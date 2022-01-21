@@ -40,6 +40,8 @@ https://tailwindcss.com/docs
     re-deploy onto heroku 
     update RapidAPI
 
+// updating state in React
+https://www.newline.co/@brookslybrand/common-mistake-with-synchronizing-state-in-react--8ab767b5
 
 
 

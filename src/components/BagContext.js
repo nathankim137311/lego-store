@@ -4,7 +4,8 @@ export const BagContext = createContext({});
 
 export const BagProvider = props => {
     const [bag, setBag] = useState([]);
-    const [totalItems, setTotalItems] = useState();
+    const [totalItems, setTotalItems] = useState(0);
+
     return (
         <BagContext.Provider value={{ bagArr: [bag, setBag], totalItemsValue: [totalItems, setTotalItems]}}>
             {props.children}
