@@ -23,7 +23,7 @@ export default function Navbar() {
     return (
         <>
             <header className='fixed top-0 flex flex-row items-center xxs:h-14 md:h-16 lg:h-20 w-full xxs:bg-white lg:bg-yellow-300 xxs:border-b-2 xxs:border-yellow-300'>
-                <nav className='w-full flex flex-row justify-between xxs:mx-4 md:mx-14 lg:mx-22 xl:mx-28'>
+                <nav className='w-full flex flex-row justify-between xxs:mx-2 sm:mx-4 md:mx-14 lg:mx-22 xl:mx-28'>
                     <ul className='flex flex-row items-center'>
                         <li className='relative flex flex-col items-center mx-2 lg:hidden'>
                             <button onClick={ handleClick }>
@@ -68,7 +68,6 @@ export default function Navbar() {
                             <a className='flex flex-col items-center' href="/">
                                 <ShoppingBagIcon className='xxs:h-14 xxs:w-6 lg:h-14 lg:w-7'/>
                             </a>
-                            {/* change bag.length here maybe */}
                             <small className='ml-1 xxs:text-xs lg:text-sm'>({totalItems})</small>
                         </li>
                     </ul>

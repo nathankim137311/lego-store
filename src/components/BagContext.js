@@ -7,7 +7,7 @@ export const BagProvider = props => {
     const [totalItems, setTotalItems] = useState(0);
 
     return (
-        <BagContext.Provider value={{ bagArr: [bag, setBag], totalItemsValue: [totalItems, setTotalItems]}}>
+        <BagContext.Provider value={{ bagArr: [bag, setBag], totalItemsValue: [totalItems, setTotalItems] }}>
             {props.children}
         </BagContext.Provider>
     );

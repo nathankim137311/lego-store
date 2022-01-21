@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { PlusIcon, MinusIcon, CakeIcon, OfficeBuildingIcon, HashtagIcon } from '@heroicons/react/outline'
 import starwarsLogo from '../png/starwars-logo.png'
 
 export default function ProductDetails( props ) {
+    const [product, setProduct] = useState({});
     const images = props.product.images.map(image => image.split('?')[0]);
 
     return (
@@ -21,8 +22,12 @@ export default function ProductDetails( props ) {
                     {/* different colors for availability add later */}
                     <small className='text-sm'>{props.product.availability}</small> 
                     <h2>Rating: {Math.round(props.product.rating * 10) / 10} / 5</h2>
-                    <QuantitySelector /> 
-                    <button className='orange-btn'>Add to Bag</button>
+                    <QuantitySelector product={props.product} setProduct={setProduct} /> 
+                    <button 
+                    className='orange-btn'
+                    // need to add to bag
+                    // onClick={}
+                    >Add to Bag</button>
                 </div>
             </div>
             <ProductInfo ages={props.product.ages} pieces={props.product.pieces} item={props.product.item_id} />
@@ -30,14 +35,16 @@ export default function ProductDetails( props ) {
     )
 }
 
-const QuantitySelector = () => {
-    const quantity = 0; 
+const QuantitySelector = ({ product, setProduct }) => {
     const handleIncrement = () => {
-        console.log('increment!');
+        if (product.quantity < 3) setProduct(product.quantity += 1); 
+        else alert('Limit three per customer'); // warning if customer purchasese more than three items
+        console.log(product.quantity); 
     }
 
     const handleDecrement = () => {
-        console.log('decrement!');
+        if (product.quantity > 1) setProduct(product.quantity -= 1);
+        console.log(product.quantity);
     }
 
     return (
@@ -49,7 +56,7 @@ const QuantitySelector = () => {
                 <MinusIcon className='h-4 w-4' />
             </button>
             <div className='flex flex-row justify-center items-center w-24 border-x-1 border-gray-300'>
-                <span>{quantity}</span>
+                <span>{product.quantity}</span>
             </div>
             <button 
             className='flex flex-row justify-center items-center h-12 w-12'
