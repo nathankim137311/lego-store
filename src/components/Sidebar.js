@@ -4,8 +4,9 @@ import { Link } from 'react-router-dom';
 import { BagContext } from './BagContext';
 
 export default function Sidebar( props ) {
-    const {bagArr} = useContext(BagContext); 
-    const [bag] = bagArr;
+    const {totalItemsValue} = useContext(BagContext); 
+    const [totalItems] = totalItemsValue;
+
     const handleClose = () => {
         props.setActive(false);
     }
@@ -39,7 +40,7 @@ export default function Sidebar( props ) {
                     <li className='sidebar-link'>
                         <Link className='text-xs' to='/shopping-bag'>
                             Shopping Bag
-                            (<small>{bag.length}</small>)
+                            (<small>{totalItems}</small>)
                         </Link>
                     </li>
                 </ul>

@@ -39,7 +39,7 @@ export default function Shop() {
             </div>
             <div className='absolute top-1/2 xxs:px-2 sm:px-4 md:px-6 lg:px-12 xl:px-24 2xl:px-48 w-full grid xxs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-4'>
                 {products.map(product => {
-                    return <ProductCard product={product} />
+                    return <ProductCard key={product.item_id} product={product} />
                 })}
             </div>
             <Navbar />

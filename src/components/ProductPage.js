@@ -11,7 +11,7 @@ export default function ProductPage() {
 
     useEffect(() => {
         fetchProduct(item_id);
-    }, []);
+    }); // removed dependency array 
 
     const fetchProduct = async (id) => {
         let product = await fetch(`https://lego-star-wars-sets.p.rapidapi.com/api/products/${id}`, {

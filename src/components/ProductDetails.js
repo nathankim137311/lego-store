@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { PlusIcon, MinusIcon, CakeIcon, OfficeBuildingIcon, HashtagIcon } from '@heroicons/react/outline'
 import starwarsLogo from '../png/starwars-logo.png'
 
@@ -31,8 +31,7 @@ export default function ProductDetails( props ) {
 }
 
 const QuantitySelector = () => {
-    const [quantity, setQuantity] = useState(1);
-    
+    const quantity = 0; 
     const handleIncrement = () => {
         console.log('increment!');
     }
