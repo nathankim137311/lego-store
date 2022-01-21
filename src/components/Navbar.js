@@ -9,8 +9,8 @@ import { BagContext } from './BagContext'
 export default function Navbar() {
     const [isActive, setActive] = useState(false); 
     const [isSearch, setSearch] = useState(false); 
-    const {bagArr} = useContext(BagContext); 
-    const [bag] = bagArr;
+    const { totalItemsValue } = useContext(BagContext); 
+    const [totalItems] = totalItemsValue;
 
     const handleClick = () => {
         setActive(true);
@@ -69,7 +69,7 @@ export default function Navbar() {
                                 <ShoppingBagIcon className='xxs:h-14 xxs:w-6 lg:h-14 lg:w-7'/>
                             </a>
                             {/* change bag.length here maybe */}
-                            <small className='ml-1 xxs:text-xs lg:text-sm'>({bag.length})</small>
+                            <small className='ml-1 xxs:text-xs lg:text-sm'>({totalItems})</small>
                         </li>
                     </ul>
                 </nav>
