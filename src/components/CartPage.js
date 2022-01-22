@@ -21,12 +21,12 @@ export default function CartPage() {
                                 <div className='xxs:w-24'>
                                     <img className='xxs:h-auto' src={item.images[0].split('?')[0]} alt={item.set} />
                                 </div>
-                                <div className='xxs:flex xxs:flex-col xxs:justify-center xxs:items-center xxs:ml-2'>
-                                    <h2 className='xxs:text-base'>
+                                <div className='xxs:flex xxs:flex-col xxs:justify-center xxs:items-center xxs:ml-4'>
+                                    <h2 className='xxs:text-sm'>
                                         <Link to={`/shop/${item.item_id}`}>{item.set}</Link>
                                     </h2>
-                                    <div className='xxs:flex xxs:flex-row xxs:w-full xxs:justify-between'>
-                                        <span className='xxs:text-sm'>Qty: {item.quantity}</span>
+                                    <div className='xxs:flex xxs:flex-row xxs:w-full'>
+                                        <span className='xxs:text-sm xxs:mr-2'>Qty: {item.quantity}</span>
                                         <span className='xxs:font-semibold xxs:text-sm'>${item.price}.99</span>
                                     </div>
                                 </div>
@@ -42,10 +42,50 @@ export default function CartPage() {
                     )
                 })}
             </ul>
-            {/* <div className='xxs:w-full xxs:h-fit xxs:mx-2 bg-red-500'>
-
-            </div> */}
+            <PromoCode />
+            <OrderSummary />
             <Navbar />
         </>
+    )
+}
+
+const PromoCode = () => {
+    return (
+        <div className='xxs:mx-2 xxs:p-4'>
+            <h2>Enter a Promo Code</h2>
+            <p className='xxs:text-sm xxs:my-4 xxs:rounded-md xxs:text-gray-700'>Got a VIP Discount Code? You'll enter that later when you're checking out!</p>
+            <div className='xxs:flex xxs:flex-row xxs:h-12'>
+                <input className='xxs:w-3/4 xxs:px-4 xxs:rounded-l-md xxs:border-1 xxs:border-gray-300' type="text" placeholder='Enter Code' />
+                <button className='xxs:w-1/4 xxs:border-r-1 xxs:rounded-r-md xxs:border-blue-600 xxs:border-1 xxs:text-sm' >Apply</button>
+            </div>
+        </div>
+    )
+}
+
+const OrderSummary = ({ totalItems }) => {
+    const orderValue = 100;
+    const total = 349.99;  
+    const isShipping = true; 
+    return (
+        <div className='xxs:mx-2 xxs:p-4'>
+            <h2 className='xxs:py-2 xxs:border-b-1 xxs:border-gray-300'>Order Summary</h2>
+            <p className='xxs:text-sm xxs:my-2 xxs:rounded-md xxs:text-gray-700'>Enter a ZIP code to estimate tax and delivery</p>
+            <div className='xxs:flex xxs:flex-row xxs:h-12 xxs:my-4'>
+                <input className='xxs:w-3/4 xxs:px-4 xxs:rounded-l-md xxs:border-1 xxs:border-gray-300' type="text" placeholder='Example: 98012' />
+                <button className='xxs:w-1/4 xxs:border-r-1 xxs:rounded-r-md xxs:border-blue-600 xxs:border-1 xxs:text-sm' >Apply</button>
+            </div>
+            <div className='xxs:flex xxs:flex-row xxs:w-full xxs:justify-between xxs:my-2'>
+                <span>Order value items</span>
+                <span>${orderValue}</span>
+            </div>
+            <div className='xxs:flex xxs:flex-row xxs:w-full xxs:justify-between xxs:my-2'>
+                <span>Shipping cost</span>
+                <span>{isShipping ? 'Free' : `$${9.99}`}</span>
+            </div>
+            <div className='xxs:flex xxs:flex-row xxs:w-full xxs:justify-between xxs:my-2 xxs:font-semibold xxs:text-lg'>
+                <span className=''>Total</span>
+                <span>{total}</span>
+            </div>
+        </div>
     )
 }
