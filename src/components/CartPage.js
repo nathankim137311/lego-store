@@ -26,7 +26,7 @@ export default function CartPage() {
                                         <Link to={`/shop/${item.item_id}`}>{item.set}</Link>
                                     </h2>
                                     <div className='xxs:flex xxs:flex-row xxs:w-full'>
-                                        <span className='xxs:text-sm xxs:mr-2'>Qty: {item.quantity}</span>
+                                        <span className='xxs:text-sm xxs:mr-2 xxs:text-gray-500'>Qty: {item.quantity}</span>
                                         <span className='xxs:font-semibold xxs:text-sm'>${item.price}.99</span>
                                     </div>
                                 </div>
@@ -51,7 +51,7 @@ export default function CartPage() {
 
 const PromoCode = () => {
     return (
-        <div className='xxs:mx-2 xxs:p-4'>
+        <div className='xxs:mx-2 xxs:p-4 xxs:my-3'>
             <h2>Enter a Promo Code</h2>
             <p className='xxs:text-sm xxs:my-4 xxs:rounded-md xxs:text-gray-700'>Got a VIP Discount Code? You'll enter that later when you're checking out!</p>
             <div className='xxs:flex xxs:flex-row xxs:h-12'>
@@ -63,11 +63,11 @@ const PromoCode = () => {
 }
 
 const OrderSummary = ({ totalItems }) => {
-    const orderValue = 100;
-    const total = 349.99;  
-    const isShipping = true; 
+    const orderValue = 100; // sum all product prices 
+    const total = 349.99; // sum of all product prices plus shipping
+    const isShipping = true; // if total is over a certain amount free shpping for customer
     return (
-        <div className='xxs:mx-2 xxs:p-4'>
+        <div className='xxs:mx-2 xxs:p-4 xxs:my-3'>
             <h2 className='xxs:py-2 xxs:border-b-1 xxs:border-gray-300'>Order Summary</h2>
             <p className='xxs:text-sm xxs:my-2 xxs:rounded-md xxs:text-gray-700'>Enter a ZIP code to estimate tax and delivery</p>
             <div className='xxs:flex xxs:flex-row xxs:h-12 xxs:my-4'>
@@ -75,16 +75,16 @@ const OrderSummary = ({ totalItems }) => {
                 <button className='xxs:w-1/4 xxs:border-r-1 xxs:rounded-r-md xxs:border-blue-600 xxs:border-1 xxs:text-sm' >Apply</button>
             </div>
             <div className='xxs:flex xxs:flex-row xxs:w-full xxs:justify-between xxs:my-2'>
-                <span>Order value items</span>
+                <span>Order value ({totalItems}) items</span>
                 <span>${orderValue}</span>
             </div>
             <div className='xxs:flex xxs:flex-row xxs:w-full xxs:justify-between xxs:my-2'>
                 <span>Shipping cost</span>
                 <span>{isShipping ? 'Free' : `$${9.99}`}</span>
             </div>
-            <div className='xxs:flex xxs:flex-row xxs:w-full xxs:justify-between xxs:my-2 xxs:font-semibold xxs:text-lg'>
-                <span className=''>Total</span>
-                <span>{total}</span>
+            <div className='xxs:flex xxs:flex-row xxs:w-full xxs:justify-between xxs:my-2 xxs:font-semibold xxs:text-lg xxs:py-4'>
+                <span>Total</span>
+                <span>${total}</span>
             </div>
         </div>
     )
