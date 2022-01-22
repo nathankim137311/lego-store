@@ -43,6 +43,11 @@ https://tailwindcss.com/docs
 // updating state in React
 https://www.newline.co/@brookslybrand/common-mistake-with-synchronizing-state-in-react--8ab767b5
 
+// add to bag 
+I want the ability for customers to specify the quantity of product they want to purchase, when they click
+the add to bag button I want the counter next to the bag icon to reflect the number of product they have 
+added. 
+
 
 
 
