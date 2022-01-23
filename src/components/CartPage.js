@@ -89,6 +89,7 @@ export default function CartPage() {
                 <FreeShippingCard isShipping={isShipping} />
                 <OrderSummary totalItems={totalItems} orderValue={orderValue} isShipping={isShipping} cartTotal={cartTotal} />
             </div>
+            <CheckoutCard cartTotal={cartTotal} />
             <Navbar />
         </>
     )
@@ -143,4 +144,19 @@ const FreeShippingCard = ({ isShipping }) => {
             </div>
         )
     } else return null
+}
+
+const CheckoutCard = ({ cartTotal }) => {
+    return (
+        <div className='xxs:fixed xxs:bottom-0 xxs:flex xxs:flex-col xxs:p-2 xxs:bg-white xxs:w-full xxs:border-t-1 xxs:border-gray-300'>
+            <div className='xxs:flex xxs:flex-row xxs:justify-between xxs:mt-2'>
+                <span>Order Total</span>
+                <span className='xxs:font-semibold'>${cartTotal}</span>
+            </div>
+            <div className='xxs:flex xxs:flex-row xxs:justify-between xxs:mt-4'>
+                <button className='xxs:h-12 xxs:w-1/2 xxs:bg-blue-600 xxs:text-white xxs:text-center xxs:rounded-md xxs:mr-2 hover:text-black hover:bg-white hover:border-2 hover:border-blue-600 '>Express Checkout</button>
+                <button className='xxs:h-12 xxs:w-1/2 xxs:bg-orange-400 xxs:rounded-md xxs:ml-2 hover:bg-white hover:border-2 hover:border-orange-400 '>Checkout</button>
+            </div>
+        </div>
+    )
 }
