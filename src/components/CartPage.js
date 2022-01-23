@@ -27,7 +27,7 @@ export default function CartPage() {
 
     useEffect(() => {
         const sumPrice = () => {
-            const newOrderValue = [...bag].reduce((prev, curr) => prev + (curr.quantity * (curr.price + 1)), 0);
+            const newOrderValue = [...bag].reduce((prev, curr) => prev + (curr.quantity * (curr.price + 1)), 0) - 0.01;
             if (newOrderValue > 50) setIsShipping(true); // if customer spends more than 50 dollars, free shipping
             else setIsShipping(false); 
             setOrderValue(newOrderValue);
@@ -42,7 +42,7 @@ export default function CartPage() {
             setCartTotal(orderValue + shippingCost);
         }
         total();
-    }, [bag, isShipping]);
+    }, [bag, isShipping, orderValue]);
 
     const deleteItem = (id) => {
         const newBag = [...bag].filter(item => item.item_id !== id); 
@@ -123,7 +123,7 @@ const OrderSummary = ({ totalItems, orderValue, isShipping, cartTotal }) => {
             <div className='xxs:flex xxs:flex-row xxs:w-full xxs:justify-between xxs:my-2 xxs:font-semibold xxs:text-lg xxs:py-4'>
                 <span>Total</span>
                 {/* a hack way to only display the first 5 characters of price */}
-                <span>${cartTotal.toString().slice(0, 5)}</span> 
+                <span>${Math.round(cartTotal * 100) / 100}</span> 
             </div>
         </div>
     )
