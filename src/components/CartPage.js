@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import Navbar from './Navbar'
 import { BagContext } from './BagContext';
 import { TrashIcon } from '@heroicons/react/outline'
@@ -8,6 +8,23 @@ export default function CartPage() {
     const {bagArr, totalItemsValue} = useContext(BagContext); 
     const [bag, setBag] = bagArr;
     const [totalItems, setTotalItems] = totalItemsValue;
+
+    useEffect(() => {
+        const sumQauntity = () => {
+            if (bag.length !== 0) {
+                const total = [...bag].reduce((prev, curr) => prev + curr.quantity, 0);
+                setTotalItems(total); 
+            } 
+            else setTotalItems(0);
+        }
+
+        sumQauntity();
+    }, [bag, totalItems, setTotalItems]);
+
+    const deleteItem = (id) => {
+        const newBag = [...bag].filter(item => item.item_id !== id); 
+        setBag(newBag);  
+    }
 
     return (
         <>
@@ -33,7 +50,7 @@ export default function CartPage() {
                             </div>
                             <div className='xxs:flex xxs:flex-col xxs:items-center xxs:justify-between xxs:w-1/5
                             xxs:my-1'>
-                                <button onClick={() => console.log('button clicked!')}>
+                                <button onClick={() => deleteItem(item.item_id)}>
                                     <TrashIcon className='xxs:w-6 xxs:text-blue-500'/>
                                 </button>
                                 <span className='xxs:text-sm xxs:text-blue-500 xxs:hover:cursor-pointer'>(Edit)</span>
@@ -56,7 +73,7 @@ const PromoCode = () => {
             <p className='xxs:text-sm xxs:my-4 xxs:rounded-md xxs:text-gray-700'>Got a VIP Discount Code? You'll enter that later when you're checking out!</p>
             <div className='xxs:flex xxs:flex-row xxs:h-12'>
                 <input className='xxs:w-3/4 xxs:px-4 xxs:rounded-l-md xxs:border-1 xxs:border-gray-300' type="text" placeholder='Enter Code' />
-                <button className='xxs:w-1/4 xxs:border-r-1 xxs:rounded-r-md xxs:border-blue-600 xxs:border-1 xxs:text-sm' >Apply</button>
+                <button className='xxs:w-1/4 xxs:border-r-1 xxs:rounded-r-md xxs:border-blue-600 xxs:border-1 xxs:text-sm'>Apply</button>
             </div>
         </div>
     )
