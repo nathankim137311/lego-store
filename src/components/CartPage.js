@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import { BagContext } from './BagContext';
 import { TrashIcon } from '@heroicons/react/outline'
@@ -8,6 +8,10 @@ export default function CartPage() {
     const {bagArr, totalItemsValue} = useContext(BagContext); 
     const [bag, setBag] = bagArr;
     const [totalItems, setTotalItems] = totalItemsValue;
+    // total 
+    const [orderValue, setOrderValue] = useState(0); 
+    const [isShipping, setIsShipping] = useState(false); 
+    const [cartTotal, setCartTotal] = useState(0); 
 
     useEffect(() => {
         const sumQauntity = () => {
@@ -20,6 +24,25 @@ export default function CartPage() {
 
         sumQauntity();
     }, [bag, totalItems, setTotalItems]);
+
+    useEffect(() => {
+        const sumPrice = () => {
+            const newOrderValue = [...bag].reduce((prev, curr) => prev + (curr.quantity * (curr.price + 1)), 0);
+            if (newOrderValue > 50) setIsShipping(true); // if customer spends more than 50 dollars, free shipping
+            else setIsShipping(false); 
+            setOrderValue(newOrderValue);
+        };
+        
+        sumPrice(); 
+    }, [bag, orderValue]);
+
+    useEffect(() => {
+        const total = () => {
+            const shippingCost = (isShipping ? 0 : 9.99); // shipping is a flat rate of 9.99
+            setCartTotal(orderValue + shippingCost);
+        }
+        total();
+    }, [bag, isShipping]);
 
     const deleteItem = (id) => {
         const newBag = [...bag].filter(item => item.item_id !== id); 
@@ -60,7 +83,7 @@ export default function CartPage() {
                 })}
             </ul>
             <PromoCode />
-            <OrderSummary />
+            <OrderSummary totalItems={totalItems} orderValue={orderValue} isShipping={isShipping} cartTotal={cartTotal} />
             <Navbar />
         </>
     )
@@ -79,21 +102,19 @@ const PromoCode = () => {
     )
 }
 
-const OrderSummary = ({ totalItems }) => {
-    const orderValue = 100; // sum all product prices 
-    const total = 349.99; // sum of all product prices plus shipping
-    const isShipping = true; // if total is over a certain amount free shpping for customer
+const OrderSummary = ({ totalItems, orderValue, isShipping, cartTotal }) => {
     return (
         <div className='xxs:mx-2 xxs:p-4 xxs:my-3'>
             <h2 className='xxs:py-2 xxs:border-b-1 xxs:border-gray-300'>Order Summary</h2>
             <p className='xxs:text-sm xxs:my-2 xxs:rounded-md xxs:text-gray-700'>Enter a ZIP code to estimate tax and delivery</p>
             <div className='xxs:flex xxs:flex-row xxs:h-12 xxs:my-4'>
                 <input className='xxs:w-3/4 xxs:px-4 xxs:rounded-l-md xxs:border-1 xxs:border-gray-300' type="text" placeholder='Example: 98012' />
-                <button className='xxs:w-1/4 xxs:border-r-1 xxs:rounded-r-md xxs:border-blue-600 xxs:border-1 xxs:text-sm' >Apply</button>
+                <button 
+                className='xxs:w-1/4 xxs:border-r-1 xxs:rounded-r-md xxs:border-blue-600 xxs:border-1 xxs:text-sm'>Apply</button>
             </div>
             <div className='xxs:flex xxs:flex-row xxs:w-full xxs:justify-between xxs:my-2'>
                 <span>Order value ({totalItems}) items</span>
-                <span>${orderValue}</span>
+                <span>${totalItems === 0 ? 0 : orderValue}</span>
             </div>
             <div className='xxs:flex xxs:flex-row xxs:w-full xxs:justify-between xxs:my-2'>
                 <span>Shipping cost</span>
@@ -101,7 +122,8 @@ const OrderSummary = ({ totalItems }) => {
             </div>
             <div className='xxs:flex xxs:flex-row xxs:w-full xxs:justify-between xxs:my-2 xxs:font-semibold xxs:text-lg xxs:py-4'>
                 <span>Total</span>
-                <span>${total}</span>
+                {/* a hack way to only display the first 5 characters of price */}
+                <span>${cartTotal.toString().slice(0, 5)}</span> 
             </div>
         </div>
     )

@@ -48,6 +48,10 @@ I want the ability for customers to specify the quantity of product they want to
 the add to bag button I want the counter next to the bag icon to reflect the number of product they have 
 added. 
 
+total price function 
+multiply the quantity by the item price and sum all of those prices. 
+
+
 
 
 
