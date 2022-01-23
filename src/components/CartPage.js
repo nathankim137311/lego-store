@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import { BagContext } from './BagContext';
 import { TrashIcon } from '@heroicons/react/outline'
+import { CheckCircleIcon } from '@heroicons/react/solid'
 import { Link } from 'react-router-dom';
 
 export default function CartPage() {
@@ -52,38 +53,42 @@ export default function CartPage() {
     return (
         <>
             <h1 className='xxs:mt-20 xxs:w-full xxs:px-2' >My Bag ({totalItems})</h1>
-            <ul className='xxs:p-1 xxs:mt-4'>
-                <h3 className='xxs:text-green-600 xxs:font-medium xxs:text-sm xxs:px-4 xxs:py-4'>Available now</h3>
-                {bag.map(item => {
-                    return (
-                        <li className='xxs:flex xxs:flex-row xxs:justify-between xxs:mx-1 xxs:py-4 xxs:border-y-1 xxs:border-gray-300' key={item.item_id}>
-                            <div className='xxs:flex xxs:flex-row xxs:w-4/5'>
-                                <div className='xxs:w-24'>
-                                    <img className='xxs:h-auto' src={item.images[0].split('?')[0]} alt={item.set} />
-                                </div>
-                                <div className='xxs:flex xxs:flex-col xxs:justify-center xxs:items-center xxs:ml-4'>
-                                    <h2 className='xxs:text-sm'>
-                                        <Link to={`/shop/${item.item_id}`}>{item.set}</Link>
-                                    </h2>
-                                    <div className='xxs:flex xxs:flex-row xxs:w-full'>
-                                        <span className='xxs:text-sm xxs:mr-2 xxs:text-gray-500'>Qty: {item.quantity}</span>
-                                        <span className='xxs:font-semibold xxs:text-sm'>${item.price}.99</span>
+            <div className='xxs:p-1 xxs:mt-4 xxs:bg-gray-100'>
+                <ul className='xxs:bg-white xxs:mx-2'>
+                    <h3 className='xxs:text-green-600 xxs:font-medium xxs:text-sm xxs:px-4 xxs:py-4'>Available now</h3>
+                    {bag.map(item => {
+                        return (
+                            <li className='xxs:flex xxs:flex-row xxs:justify-between xxs:py-4 xxs:border-b-1 xxs:border-gray-300' key={item.item_id}>
+                                {/* {'xxs:border-b-1 xxs:border-gray-300'} */}
+                                <div className='xxs:flex xxs:flex-row xxs:w-4/5'>
+                                    <div className='xxs:w-24'>
+                                        <img className='xxs:h-auto' src={item.images[0].split('?')[0]} alt={item.set} />
+                                    </div>
+                                    <div className='xxs:flex xxs:flex-col xxs:justify-center xxs:items-center xxs:ml-4'>
+                                        <h2 className='xxs:text-sm'>
+                                            <Link to={`/shop/${item.item_id}`}>{item.set}</Link>
+                                        </h2>
+                                        <div className='xxs:flex xxs:flex-row xxs:w-full'>
+                                            <span className='xxs:text-sm xxs:mr-2 xxs:text-gray-500'>Qty: {item.quantity}</span>
+                                            <span className='xxs:font-semibold xxs:text-sm'>${item.price}.99</span>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div className='xxs:flex xxs:flex-col xxs:items-center xxs:justify-between xxs:w-1/5
-                            xxs:my-1'>
-                                <button onClick={() => deleteItem(item.item_id)}>
-                                    <TrashIcon className='xxs:w-6 xxs:text-blue-500'/>
-                                </button>
-                                <span className='xxs:text-sm xxs:text-blue-500 xxs:hover:cursor-pointer'>(Edit)</span>
-                            </div>
-                        </li>
-                    )
-                })}
-            </ul>
-            <PromoCode />
-            <OrderSummary totalItems={totalItems} orderValue={orderValue} isShipping={isShipping} cartTotal={cartTotal} />
+                                <div className='xxs:flex xxs:flex-col xxs:items-center xxs:justify-between xxs:w-1/5
+                                xxs:my-1'>
+                                    <button onClick={() => deleteItem(item.item_id)}>
+                                        <TrashIcon className='xxs:w-6 xxs:text-blue-500'/>
+                                    </button>
+                                    <span className='xxs:text-sm xxs:text-blue-500 xxs:hover:cursor-pointer'>(Edit)</span>
+                                </div>
+                            </li>
+                        )
+                    })}
+                </ul>
+                <PromoCode />
+                <FreeShippingCard isShipping={isShipping} />
+                <OrderSummary totalItems={totalItems} orderValue={orderValue} isShipping={isShipping} cartTotal={cartTotal} />
+            </div>
             <Navbar />
         </>
     )
@@ -91,7 +96,7 @@ export default function CartPage() {
 
 const PromoCode = () => {
     return (
-        <div className='xxs:mx-2 xxs:p-4 xxs:my-3'>
+        <div className='xxs:mx-2 xxs:p-4 xxs:my-3 xxs:bg-white'>
             <h2>Enter a Promo Code</h2>
             <p className='xxs:text-sm xxs:my-4 xxs:rounded-md xxs:text-gray-700'>Got a VIP Discount Code? You'll enter that later when you're checking out!</p>
             <div className='xxs:flex xxs:flex-row xxs:h-12'>
@@ -104,7 +109,7 @@ const PromoCode = () => {
 
 const OrderSummary = ({ totalItems, orderValue, isShipping, cartTotal }) => {
     return (
-        <div className='xxs:mx-2 xxs:p-4 xxs:my-3'>
+        <div className='xxs:mx-2 xxs:p-4 xxs:my-3 xxs:bg-white'>
             <h2 className='xxs:py-2 xxs:border-b-1 xxs:border-gray-300'>Order Summary</h2>
             <p className='xxs:text-sm xxs:my-2 xxs:rounded-md xxs:text-gray-700'>Enter a ZIP code to estimate tax and delivery</p>
             <div className='xxs:flex xxs:flex-row xxs:h-12 xxs:my-4'>
@@ -127,4 +132,15 @@ const OrderSummary = ({ totalItems, orderValue, isShipping, cartTotal }) => {
             </div>
         </div>
     )
+}
+
+const FreeShippingCard = ({ isShipping }) => {
+    if (isShipping === true) {
+        return (
+            <div className='xxs:flex xxs:flex-row xxs:justify-center xxs:items-center xxs:w-auto xxs:bg-green-100 xxs:px-6 xxs:py-4 xxs:my-3 xxs:mx-2'>
+                <CheckCircleIcon className='xxs:h-8 xxs:w-8 xxs:text-green-500 xxs:mr-1'/>
+                <span className='xxs:text-sm xxs:font-light'>Congratulations - you get FREE delivery!</span>
+            </div>
+        )
+    } else return null
 }

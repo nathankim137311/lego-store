@@ -1,6 +1,9 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 module.exports = {
+  variants: {
+    borderWidth: ['first', 'responsive'],
+  },
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
   ],
