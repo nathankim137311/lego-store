@@ -128,7 +128,6 @@ const OrderSummary = ({ totalItems, orderValue, isShipping, cartTotal }) => {
             </div>
             <div className='xxs:flex xxs:flex-row xxs:w-full xxs:justify-between xxs:my-2 xxs:font-semibold xxs:text-lg xxs:py-4'>
                 <span>Total</span>
-                {/* a hack way to only display the first 5 characters of price */}
                 <span>${Math.round(cartTotal * 100) / 100}</span> 
             </div>
         </div>
@@ -151,7 +150,7 @@ const CheckoutCard = ({ cartTotal }) => {
         <div className='xxs:fixed xxs:bottom-0 xxs:flex xxs:flex-col xxs:p-2 xxs:bg-white xxs:w-full xxs:border-t-1 xxs:border-gray-300'>
             <div className='xxs:flex xxs:flex-row xxs:justify-between xxs:mt-2'>
                 <span>Order Total</span>
-                <span className='xxs:font-semibold'>${cartTotal}</span>
+                <span className='xxs:font-semibold'>${Math.round(cartTotal * 100) / 100}</span>
             </div>
             <div className='xxs:flex xxs:flex-row xxs:justify-between xxs:mt-4'>
                 <button className='xxs:h-12 xxs:w-1/2 xxs:bg-blue-600 xxs:text-white xxs:text-center xxs:rounded-md xxs:mr-2 hover:text-black hover:bg-white hover:border-2 hover:border-blue-600 '>Express Checkout</button>
