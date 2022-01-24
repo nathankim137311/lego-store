@@ -12,7 +12,9 @@ export default function CartPage() {
     // total 
     const [orderValue, setOrderValue] = useState(0); 
     const [isShipping, setIsShipping] = useState(false); 
-    const [cartTotal, setCartTotal] = useState(0); 
+    const [cartTotal, setCartTotal] = useState(0);
+    // edit module
+    const [edit, setEdit] = useState(false);  
 
     useEffect(() => {
         const sumQauntity = () => {
@@ -50,8 +52,8 @@ export default function CartPage() {
         setBag(newBag);  
     }
 
-    if (bag.length === 0) {
-
+    const toggleEdit = () => {
+        setEdit(!edit);
     }
 
     return (
@@ -59,34 +61,38 @@ export default function CartPage() {
             <h1 className='xxs:pt-24 xxs:w-full xxs:px-2 sm:px-4' >My Bag ({totalItems})</h1>
             <div className='xxs:p-1 xxs:mt-4 sm:flex sm:flex-row sm:mt-4'>
                 <ul className=' xxs:mx-2 sm:w-2/3'>
+                    {bag.length === 0 ? <></> : <h3 className='xxs:text-green-600 xxs:font-medium xxs:text-sm xxs:px-4 xxs:py-4 xxs:bg-white'>Available now</h3>}
                     {bag.length === 0 ? <EmptyBag /> : bag.map(item => {
                         return (
-                            <>
-                            <h3 className='xxs:text-green-600 xxs:font-medium xxs:text-sm xxs:px-4 xxs:py-4 xxs:bg-white'>Available now</h3>
-                            <li className='xxs:flex xxs:flex-row xxs:justify-between xxs:py-4 xxs:border-b-1 xxs:border-gray-300 xxs:bg-white' key={item.item_id}>
-                                <div className='xxs:flex xxs:flex-row xxs:w-4/5 xxs:justify-between'>
-                                    <div className='xxs:w-24'>
-                                        <img className='xxs:h-auto' src={item.images[0].split('?')[0]} alt={item.set} />
-                                    </div>
-                                    <div className='xxs:flex xxs:flex-col xxs:justify-center xxs:items-between xxs:w-3/5 xxs:ml-4'>
-                                        <h2 className='xxs:text-sm'>
-                                            <Link to={`/shop/${item.item_id}`}>{item.set}</Link>
-                                        </h2>
-                                        <div className='xxs:flex xxs:flex-row'>
-                                            <span className='xxs:text-sm xxs:mr-2 xxs:text-gray-500'>Qty: {item.quantity}</span>
-                                            <span className='xxs:font-semibold xxs:text-sm'>${item.price}.99</span>
+                            <li key={item.item_id} className='xxs:flex xxs:flex-col xxs:border-b-1 xxs:border-gray-300 xxs:bg-white'>
+                                <div className='xxs:flex xxs:flex-row xxs:justify-between xxs:py-4'>
+                                    <div className='xxs:flex xxs:flex-row xxs:w-4/5 xxs:justify-between'>
+                                        <div className='xxs:w-24'>
+                                            <img className='xxs:h-auto' src={item.images[0].split('?')[0]} alt={item.set} />
+                                        </div>
+                                        <div className='xxs:flex xxs:flex-col xxs:justify-center xxs:items-between xxs:w-3/5 xxs:ml-4'>
+                                            <h2 className='xxs:text-sm'>
+                                                <Link to={`/shop/${item.item_id}`}>{item.set}</Link>
+                                            </h2>
+                                            <div className='xxs:flex xxs:flex-row'>
+                                                <span className='xxs:text-sm xxs:mr-2 xxs:text-gray-500'>Qty: {item.quantity}</span>
+                                                <span className='xxs:font-semibold xxs:text-sm'>${item.price}.99</span>
+                                            </div>
                                         </div>
                                     </div>
+                                    <div className='xxs:flex xxs:flex-col xxs:items-center xxs:justify-between xxs:w-1/5
+                                    xxs:my-1'>
+                                        <button onClick={() => deleteItem(item.item_id)}>
+                                            <TrashIcon className='xxs:w-6 xxs:text-blue-500'/>
+                                        </button>
+                                        <span 
+                                        className='xxs:text-sm xxs:text-blue-500 xxs:hover:cursor-pointer'
+                                        onClick={toggleEdit}
+                                        >(Edit)</span>
+                                    </div>
                                 </div>
-                                <div className='xxs:flex xxs:flex-col xxs:items-center xxs:justify-between xxs:w-1/5
-                                xxs:my-1'>
-                                    <button onClick={() => deleteItem(item.item_id)}>
-                                        <TrashIcon className='xxs:w-6 xxs:text-blue-500'/>
-                                    </button>
-                                    <span className='xxs:text-sm xxs:text-blue-500 xxs:hover:cursor-pointer'>(Edit)</span>
-                                </div>
+                                {edit ? <h1>Edit container</h1> : <></>}
                             </li>
-                            </>
                         )
                     })}
                 </ul>
