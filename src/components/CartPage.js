@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import { BagContext } from './BagContext';
-import { TrashIcon } from '@heroicons/react/outline'
+import { TrashIcon, MinusIcon, PlusIcon } from '@heroicons/react/outline'
 import { CheckCircleIcon } from '@heroicons/react/solid'
 import { Link } from 'react-router-dom';
 
@@ -13,8 +13,6 @@ export default function CartPage() {
     const [orderValue, setOrderValue] = useState(0); 
     const [isShipping, setIsShipping] = useState(false); 
     const [cartTotal, setCartTotal] = useState(0);
-    // edit module
-    const [edit, setEdit] = useState(false);  
 
     useEffect(() => {
         const sumQauntity = () => {
@@ -47,15 +45,6 @@ export default function CartPage() {
         total();
     }, [bag, isShipping, orderValue]);
 
-    const deleteItem = (id) => {
-        const newBag = [...bag].filter(item => item.item_id !== id); 
-        setBag(newBag);  
-    }
-
-    const toggleEdit = () => {
-        setEdit(!edit);
-    }
-
     return (
         <div className='bg-gray-100'>
             <h1 className='xxs:pt-24 xxs:w-full xxs:px-2 sm:px-4' >My Bag ({totalItems})</h1>
@@ -64,34 +53,8 @@ export default function CartPage() {
                     {bag.length === 0 ? <></> : <h3 className='xxs:text-green-600 xxs:font-medium xxs:text-sm xxs:px-4 xxs:py-4 xxs:bg-white'>Available now</h3>}
                     {bag.length === 0 ? <EmptyBag /> : bag.map(item => {
                         return (
-                            <li key={item.item_id} className='xxs:flex xxs:flex-col xxs:border-b-1 xxs:border-gray-300 xxs:bg-white'>
-                                <div className='xxs:flex xxs:flex-row xxs:justify-between xxs:py-4'>
-                                    <div className='xxs:flex xxs:flex-row xxs:w-4/5 xxs:justify-between'>
-                                        <div className='xxs:w-24'>
-                                            <img className='xxs:h-auto' src={item.images[0].split('?')[0]} alt={item.set} />
-                                        </div>
-                                        <div className='xxs:flex xxs:flex-col xxs:justify-center xxs:items-between xxs:w-3/5 xxs:ml-4'>
-                                            <h2 className='xxs:text-sm'>
-                                                <Link to={`/shop/${item.item_id}`}>{item.set}</Link>
-                                            </h2>
-                                            <div className='xxs:flex xxs:flex-row'>
-                                                <span className='xxs:text-sm xxs:mr-2 xxs:text-gray-500'>Qty: {item.quantity}</span>
-                                                <span className='xxs:font-semibold xxs:text-sm'>${item.price}.99</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div className='xxs:flex xxs:flex-col xxs:items-center xxs:justify-between xxs:w-1/5
-                                    xxs:my-1'>
-                                        <button onClick={() => deleteItem(item.item_id)}>
-                                            <TrashIcon className='xxs:w-6 xxs:text-blue-500'/>
-                                        </button>
-                                        <span 
-                                        className='xxs:text-sm xxs:text-blue-500 xxs:hover:cursor-pointer'
-                                        onClick={toggleEdit}
-                                        >(Edit)</span>
-                                    </div>
-                                </div>
-                                {edit ? <h1>Edit container</h1> : <></>}
+                            <li key={item.item_id}>
+                                <ItemDetails item={item} bag={bag} setBag={setBag} />
                             </li>
                         )
                     })}
@@ -109,6 +72,113 @@ export default function CartPage() {
             <CheckoutCard cartTotal={cartTotal} />
             <Navbar />
         </div>
+    )
+}
+
+const ItemDetails = ({ item, bag, setBag }) => {
+    const [edit, setEdit] = useState(false); 
+
+    const deleteItem = (id) => {
+        const newBag = [...bag].filter(item => item.item_id !== id); 
+        setBag(newBag);  
+    }
+
+    const toggleEdit = () => {
+        setEdit(!edit);
+    }
+
+    return (
+        <div className='xxs:flex xxs:flex-col xxs:border-b-1 xxs:border-gray-300 xxs:bg-white'>
+            <div className='xxs:flex xxs:flex-row xxs:justify-between xxs:py-4'>
+                <div className='xxs:flex xxs:flex-row xxs:w-4/5 xxs:justify-between'>
+                    <div className='xxs:w-24'>
+                        <img className='xxs:h-auto' src={item.images[0].split('?')[0]} alt={item.set} />
+                    </div>
+                    <div className='xxs:flex xxs:flex-col xxs:justify-center xxs:items-between xxs:w-3/5 xxs:ml-4'>
+                        <h2 className='xxs:text-sm'>
+                            <Link to={`/shop/${item.item_id}`}>{item.set}</Link>
+                        </h2>
+                        <div className='xxs:flex xxs:flex-row'>
+                            <span className='xxs:text-sm xxs:mr-2 xxs:text-gray-500'>Qty: {item.quantity}</span>
+                            <span className='xxs:font-semibold xxs:text-sm'>${item.price}.99</span>
+                        </div>
+                    </div>
+                </div>
+                <div className='xxs:flex xxs:flex-col xxs:items-center xxs:justify-between xxs:w-1/5
+                xxs:my-1'>
+                    <button onClick={() => deleteItem(item.item_id)}>
+                        <TrashIcon className='xxs:w-6 xxs:text-blue-500'/>
+                    </button>
+                    <span 
+                    className='xxs:text-sm xxs:text-blue-500 xxs:hover:cursor-pointer'
+                    onClick={toggleEdit}
+                    >{edit ? '' : '(Edit)'}</span>
+                </div>
+            </div>
+            {edit 
+            ? 
+            <div className='xxs:w-auto xxs:flex xxs:flex-row xxs:justify-between xxs:items-center xxs:mx-3'>
+                <QuantitySelector item={item} bag={bag} setBag={setBag} edit={edit} setEdit={setEdit} />
+            </div> 
+            : 
+            <></>
+            }
+        </div>
+    )
+}
+
+const QuantitySelector = ({ item, bag, setBag, edit, setEdit }) => {
+    const [quantity, setQuantity] = useState(item.quantity); 
+    
+    const handleIncrement = () => {
+        if (quantity < 3) {
+            setQuantity(prevQuantity => prevQuantity + 1);
+        }
+        else alert('Limit three per customer');
+        console.log(quantity); 
+    }
+
+    const handleDecrement = () => {
+        if (quantity > 1) {
+            setQuantity(prevQuantity => prevQuantity - 1);
+        }
+        console.log(quantity);
+    }
+
+    const handleDone = () => {
+        const newBag = [...bag]; 
+        const index = newBag.findIndex(product => product.item_id === item.item_id);
+        newBag[index].quantity = quantity;
+        setBag(newBag);
+        setEdit(false);    
+    }
+
+    return (
+        <>
+            <div className='flex flex-row justify-start w-fit rounded-md border-1 border-gray-300 my-4'>
+                <button 
+                className='flex flex-row justify-center items-center h-12 w-12'
+                onClick={handleDecrement}
+                >
+                    <MinusIcon className='h-4 w-4' />
+                </button>
+                <div className='flex flex-row justify-center items-center w-24 border-x-1 border-gray-300'>
+                    <span>{quantity}</span>
+                </div>
+                <button 
+                className='flex flex-row justify-center items-center h-12 w-12'
+                onClick={handleIncrement}
+                >
+                    <PlusIcon className='h-4 w-4' />
+                </button>
+            </div>
+            <span 
+            className='xxs:text-sm xxs:text-blue-500 xxs:hover:cursor-pointer'
+            onClick={handleDone}
+            >
+                {edit ? '(Done)' : ''}
+            </span>
+        </>
     )
 }
 
