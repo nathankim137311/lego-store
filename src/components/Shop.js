@@ -6,10 +6,12 @@ import ProductCard from './ProductCard';
 export default function Shop() {
     const [products, setProducts] = useState([]);
     const [page, setPage] = useState(1);
+    // const [loading, setLoading] = useState(false); 
 
     useEffect(() => {
         const fetchProducts = async (page) => {
             try {
+                // setLoading(true); 
                 let data = await fetch(`https://lego-star-wars-sets.p.rapidapi.com/api/products?page=${page}&limit=10`, {
                     "method": "GET",
                     "headers": {
@@ -35,7 +37,6 @@ export default function Shop() {
     }, [page]);
 
     const loadMore = () => {
-        console.log(page);
         setPage(prevPage => prevPage + 1); 
     }
 

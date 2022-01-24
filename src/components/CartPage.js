@@ -60,15 +60,15 @@ export default function CartPage() {
                         return (
                             <li className='xxs:flex xxs:flex-row xxs:justify-between xxs:py-4 xxs:border-b-1 xxs:border-gray-300' key={item.item_id}>
                                 {/* {'xxs:border-b-1 xxs:border-gray-300'} */}
-                                <div className='xxs:flex xxs:flex-row xxs:w-4/5'>
+                                <div className='xxs:flex xxs:flex-row xxs:w-4/5 xxs:justify-between'>
                                     <div className='xxs:w-24'>
                                         <img className='xxs:h-auto' src={item.images[0].split('?')[0]} alt={item.set} />
                                     </div>
-                                    <div className='xxs:flex xxs:flex-col xxs:justify-center xxs:items-center xxs:ml-4'>
+                                    <div className='xxs:flex xxs:flex-col xxs:justify-center xxs:items-between xxs:w-3/5 xxs:ml-4'>
                                         <h2 className='xxs:text-sm'>
                                             <Link to={`/shop/${item.item_id}`}>{item.set}</Link>
                                         </h2>
-                                        <div className='xxs:flex xxs:flex-row xxs:w-full'>
+                                        <div className='xxs:flex xxs:flex-row'>
                                             <span className='xxs:text-sm xxs:mr-2 xxs:text-gray-500'>Qty: {item.quantity}</span>
                                             <span className='xxs:font-semibold xxs:text-sm'>${item.price}.99</span>
                                         </div>
