@@ -51,6 +51,12 @@ added.
 total price function 
 multiply the quantity by the item price and sum all of those prices. 
 
+load more infinite scrolling functionality 
+since I already have built an api that has pagination, all I have to do is trigger a function that will
+fetch the data and use the url parameters as variables. When the user scrolls all the way down trigger
+fetch data function. When that function is called increment + 1 to the page count parameter and add the 
+items into an array. 
+
 
 
 

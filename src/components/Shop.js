@@ -5,28 +5,39 @@ import ProductCard from './ProductCard';
 
 export default function Shop() {
     const [products, setProducts] = useState([]);
+    const [page, setPage] = useState(1);
 
     useEffect(() => {
-        fetchProducts();
-    }, []);
-
-    const fetchProducts = async () => {
-        try {
-            let products = await fetch("https://lego-star-wars-sets.p.rapidapi.com/api/products?page=1&limit=8", {
-                "method": "GET",
-                "headers": {
-                    "x-rapidapi-host": "lego-star-wars-sets.p.rapidapi.com",
-                    "x-rapidapi-key": "76acaf4aaamshdc4d06215addb4ap16e33cjsn782c56471964"
+        const fetchProducts = async (page) => {
+            try {
+                let data = await fetch(`https://lego-star-wars-sets.p.rapidapi.com/api/products?page=${page}&limit=10`, {
+                    "method": "GET",
+                    "headers": {
+                        "x-rapidapi-host": "lego-star-wars-sets.p.rapidapi.com",
+                        "x-rapidapi-key": "76acaf4aaamshdc4d06215addb4ap16e33cjsn782c56471964"
+                    }
+                });
+                data = await data.json();
+                data.products.forEach(product => product.quantity = 1);
+                // saves products fetched from API
+                if (products.length !== 0) {
+                    const mergedProducts = [...products, ...data.products];    
+                    setProducts(mergedProducts);
+                } else {
+                    setProducts(data.products);
                 }
-            });
-            products = await products.json();
-            products.products.forEach(product => product.quantity = 1);
-            // saves products fetched from API
-            setProducts(products.products);
-        } catch (err) {
-            console.log(err);
-        }
-    } 
+            } catch (err) {
+                console.log(err);
+            }
+        } 
+
+        fetchProducts(page);
+    }, [page]);
+
+    const loadMore = () => {
+        console.log(page);
+        setPage(prevPage => prevPage + 1); 
+    }
 
     return (
         <> 
@@ -39,6 +50,7 @@ export default function Shop() {
                 {products.map(product => {
                     return <ProductCard key={product.item_id} product={product} />
                 })}
+                <button onClick={loadMore} >Load More</button>
             </div>
             <Navbar />
         </>
