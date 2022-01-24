@@ -38,7 +38,7 @@ export default function Sidebar( props ) {
                         <Link className='text-sm' to='/contact'>CONTACT</Link>
                     </li>
                     <li className='sidebar-link'>
-                        <Link className='text-xs' to='/shopping-bag'>
+                        <Link className='text-xs' to='/cart'>
                             Shopping Bag
                             (<small>{totalItems}</small>)
                         </Link>

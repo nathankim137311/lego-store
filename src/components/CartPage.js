@@ -129,20 +129,18 @@ const ItemDetails = ({ item, bag, setBag }) => {
 
 const QuantitySelector = ({ item, bag, setBag, edit, setEdit }) => {
     const [quantity, setQuantity] = useState(item.quantity); 
-    
+
     const handleIncrement = () => {
         if (quantity < 3) {
             setQuantity(prevQuantity => prevQuantity + 1);
         }
         else alert('Limit three per customer');
-        console.log(quantity); 
     }
 
     const handleDecrement = () => {
         if (quantity > 1) {
             setQuantity(prevQuantity => prevQuantity - 1);
         }
-        console.log(quantity);
     }
 
     const handleDone = () => {
