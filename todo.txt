@@ -40,6 +40,23 @@ https://tailwindcss.com/docs
     re-deploy onto heroku 
     update RapidAPI
 
+// updating state in React
+https://www.newline.co/@brookslybrand/common-mistake-with-synchronizing-state-in-react--8ab767b5
+
+// add to bag 
+I want the ability for customers to specify the quantity of product they want to purchase, when they click
+the add to bag button I want the counter next to the bag icon to reflect the number of product they have 
+added. 
+
+total price function 
+multiply the quantity by the item price and sum all of those prices. 
+
+load more infinite scrolling functionality 
+since I already have built an api that has pagination, all I have to do is trigger a function that will
+fetch the data and use the url parameters as variables. When the user scrolls all the way down trigger
+fetch data function. When that function is called increment + 1 to the page count parameter and add the 
+items into an array. 
+
 
 
 

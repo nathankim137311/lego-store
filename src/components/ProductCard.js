@@ -1,11 +1,41 @@
-import React from 'react'
+import React, { useContext, useEffect } from 'react'
 import { Link } from 'react-router-dom';
+import { BagContext } from './BagContext';
 
-export default function ProductCard({ product, bag, setBag }) {
+export default function ProductCard({ product }) {
+    const {bagArr, totalItemsValue} = useContext(BagContext); 
+    const [bag, setBag] = bagArr;
+    const [totalItems, setTotalItems] = totalItemsValue;
+
+    useEffect(() => {
+        const sumQauntity = () => {
+            if (bag.length !== 0) {
+                const total = [...bag].reduce((prev, curr) => prev + curr.quantity, 0);
+                setTotalItems(total); 
+            } 
+        }
+
+        sumQauntity();
+    }, [totalItems, bag, setTotalItems])
+
     const addToBag = () => {
-        const newBag = [...bag];
-        newBag.push(product);
-        setBag(newBag); 
+        // push product to array if specific product doesn't exist else increment product quantity by one
+        const bagItem = [...bag].find(item => item.item_id === product.item_id);
+
+        if (bagItem === undefined) {
+            const newBag = [...bag];
+            newBag.push(product);
+            setBag(newBag);
+        } else {
+            const newBag = [...bag].map(item => {
+                if (item.item_id === product.item_id) {
+                    item.quantity += 1; 
+                }
+    
+                return item; 
+            });
+            setBag(newBag);
+        }
     }
 
     return (

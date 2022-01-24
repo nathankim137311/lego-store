@@ -5,12 +5,13 @@ import legoLogo from '../png/Lego-logo.png'
 import legoHead from '../png/legoHead.png'
 import Sidebar from './Sidebar'
 import { BagContext } from './BagContext'
+import { Link } from 'react-router-dom'
 
 export default function Navbar() {
     const [isActive, setActive] = useState(false); 
     const [isSearch, setSearch] = useState(false); 
-    const {bagArr} = useContext(BagContext); 
-    const [bag, setBag] = bagArr;
+    const { totalItemsValue } = useContext(BagContext); 
+    const [totalItems] = totalItemsValue;
 
     const handleClick = () => {
         setActive(true);
@@ -23,7 +24,7 @@ export default function Navbar() {
     return (
         <>
             <header className='fixed top-0 flex flex-row items-center xxs:h-14 md:h-16 lg:h-20 w-full xxs:bg-white lg:bg-yellow-300 xxs:border-b-2 xxs:border-yellow-300'>
-                <nav className='w-full flex flex-row justify-between xxs:mx-4 md:mx-14 lg:mx-22 xl:mx-28'>
+                <nav className='w-full flex flex-row justify-between xxs:mx-2 sm:mx-4 md:mx-14 lg:mx-22 xl:mx-28'>
                     <ul className='flex flex-row items-center'>
                         <li className='relative flex flex-col items-center mx-2 lg:hidden'>
                             <button onClick={ handleClick }>
@@ -32,21 +33,21 @@ export default function Navbar() {
                             <small className='text-xxs'>MENU</small>
                         </li>
                         <li>
-                            <a href="/">
+                            <Link to='/'>
                                 <img className='xxs:h-10 xxs:w-18 lg:h-14 lg:w-24' src={ legoLogo } alt="Lego logo" />
-                            </a>
+                            </Link>
                         </li>
                     </ul>
                     <ul className='flex flex-row items-center'>
                         <div className='xxs:hidden lg:flex flex-row items-center'>
                             <li className='mx-3 lg:text-base font-medium'>
-                                <a href="/shop">SHOP</a>
+                                <Link to='/shop'>SHOP</Link>
                             </li>
                             <li className='mx-3 lg:text-base font-medium'>
-                                <a href="/watchlist">WATCHLIST</a>
+                                <Link to='/watchlist'>WATCHLIST</Link>
                             </li>
                             <li className='blue-btn mx-3 lg:text-base'>
-                                <a href="/contact">Contact</a>
+                                <Link to='/contact'>Contact</Link>
                             </li>
                         </div>
                         <li className='flex flex-row items-center xxs:mx-2 lg:mx-3'>
@@ -58,18 +59,17 @@ export default function Navbar() {
                             <SearchBar isSearch={ isSearch } handleSearch={ handleSearch } />
                         </li>
                         <li className='flex flex-row items-center justify-center xxs:mx-2 lg:mx-3'>
-                            <a href="/">
+                            <Link to='/account'>
                                 <div className='flex flex-row justify-center items-center p-2 xxs:bg-blue-300 lg:bg-white rounded-full'>
                                     <img className='xxs:h-5 xxs:w-5 lg:h-6 lg:w-6' src={ legoHead } alt="" />
                                 </div>
-                            </a>
+                            </Link>
                         </li>
                         <li className='relative flex flex-row items-center justify-center xxs:mx-2 lg:mx-3'>
-                            <a className='flex flex-col items-center' href="/">
+                            <Link className='flex flex-col items-center' to='/cart'>
                                 <ShoppingBagIcon className='xxs:h-14 xxs:w-6 lg:h-14 lg:w-7'/>
-                            </a>
-                            {/* change bag.length here maybe */}
-                            <small className='ml-1 xxs:text-xs lg:text-sm'>({bag.length})</small>
+                            </Link>
+                            <small className='ml-1 xxs:text-xs lg:text-sm'>({totalItems})</small>
                         </li>
                     </ul>
                 </nav>

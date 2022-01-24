@@ -11,7 +11,7 @@ export default function ProductPage() {
 
     useEffect(() => {
         fetchProduct(item_id);
-    }, []);
+    }, []); // removed dependency array 
 
     const fetchProduct = async (id) => {
         let product = await fetch(`https://lego-star-wars-sets.p.rapidapi.com/api/products/${id}`, {
@@ -22,8 +22,10 @@ export default function ProductPage() {
             }
         });
         product = await product.json();
+        product[0].quantity = 1; 
         setProduct(product);
     }
+
     return (
         <>
             <div className='flex flex-row xxs:mt-16 lg:mt-20 w-full xxs:p-4 sm:px-6 lg:p-8 lg:px-20 xl:px-28 2xl:px-40 text-sm'>

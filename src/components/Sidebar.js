@@ -1,8 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { XIcon } from '@heroicons/react/solid'
 import { Link } from 'react-router-dom';
+import { BagContext } from './BagContext';
 
 export default function Sidebar( props ) {
+    const {totalItemsValue} = useContext(BagContext); 
+    const [totalItems] = totalItemsValue;
+
     const handleClose = () => {
         props.setActive(false);
     }
@@ -34,9 +38,9 @@ export default function Sidebar( props ) {
                         <Link className='text-sm' to='/contact'>CONTACT</Link>
                     </li>
                     <li className='sidebar-link'>
-                        <Link className='text-xs' to='/shopping-bag'>
+                        <Link className='text-xs' to='/cart'>
                             Shopping Bag
-                            (<small>0</small>)
+                            (<small>{totalItems}</small>)
                         </Link>
                     </li>
                 </ul>
