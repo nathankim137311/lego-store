@@ -52,14 +52,13 @@ export default function CartPage() {
 
     return (
         <>
-            <h1 className='xxs:mt-20 xxs:w-full xxs:px-2' >My Bag ({totalItems})</h1>
-            <div className='xxs:p-1 xxs:mt-4 xxs:bg-gray-100'>
-                <ul className='xxs:bg-white xxs:mx-2'>
-                    <h3 className='xxs:text-green-600 xxs:font-medium xxs:text-sm xxs:px-4 xxs:py-4'>Available now</h3>
+            <h1 className='xxs:mt-20 xxs:w-full xxs:px-2 sm:px-4' >My Bag ({totalItems})</h1>
+            <div className='xxs:p-1 xxs:mt-4 xxs:bg-gray-100 sm:flex sm:flex-row sm:mt-4'>
+                <ul className='xxs:bg-gray-100 xxs:mx-2 sm:w-2/3'>
+                    <h3 className='xxs:text-green-600 xxs:font-medium xxs:text-sm xxs:px-4 xxs:py-4 xxs:bg-white'>Available now</h3>
                     {bag.map(item => {
                         return (
-                            <li className='xxs:flex xxs:flex-row xxs:justify-between xxs:py-4 xxs:border-b-1 xxs:border-gray-300' key={item.item_id}>
-                                {/* {'xxs:border-b-1 xxs:border-gray-300'} */}
+                            <li className='xxs:flex xxs:flex-row xxs:justify-between xxs:py-4 xxs:border-b-1 xxs:border-gray-300 xxs:bg-white' key={item.item_id}>
                                 <div className='xxs:flex xxs:flex-row xxs:w-4/5 xxs:justify-between'>
                                     <div className='xxs:w-24'>
                                         <img className='xxs:h-auto' src={item.images[0].split('?')[0]} alt={item.set} />
@@ -85,9 +84,15 @@ export default function CartPage() {
                         )
                     })}
                 </ul>
-                <PromoCode />
-                <FreeShippingCard isShipping={isShipping} />
-                <OrderSummary totalItems={totalItems} orderValue={orderValue} isShipping={isShipping} cartTotal={cartTotal} />
+                <div className='sm:flex sm:flex-col sm:w-1/3'>
+                    <PromoCode />
+                    <FreeShippingCard isShipping={isShipping} />
+                    <OrderSummary totalItems={totalItems} orderValue={orderValue} isShipping={isShipping} cartTotal={cartTotal} />
+                    <div className='xxs:hidden sm:flex sm:flex-col sm:items-center sm:bg-white sm:mx-2 sm:py-4'>
+                        <button className='sm:my-2 sm:h-10 sm:w-4/5 sm:bg-orange-400 sm:rounded-md hover:bg-white hover:border-2 hover:border-orange-400'>Express Checkout</button>
+                        <button className='sm:my-2 sm:h-10 sm:w-4/5 sm:bg-blue-600 sm:text-white sm:rounded-md hover:bg-white hover:border-2 hover:border-blue-600 hover:text-black'>Checkout</button>
+                    </div>
+                </div>
             </div>
             <CheckoutCard cartTotal={cartTotal} />
             <Navbar />
@@ -97,7 +102,7 @@ export default function CartPage() {
 
 const PromoCode = () => {
     return (
-        <div className='xxs:mx-2 xxs:p-4 xxs:my-3 xxs:bg-white'>
+        <div className='xxs:mx-2 xxs:p-4 xxs:my-3 xxs:bg-white sm:mt-0'>
             <h2>Enter a Promo Code</h2>
             <p className='xxs:text-sm xxs:my-4 xxs:rounded-md xxs:text-gray-700'>Got a VIP Discount Code? You'll enter that later when you're checking out!</p>
             <div className='xxs:flex xxs:flex-row xxs:h-12'>
@@ -138,8 +143,8 @@ const FreeShippingCard = ({ isShipping }) => {
     if (isShipping === true) {
         return (
             <div className='xxs:flex xxs:flex-row xxs:justify-center xxs:items-center xxs:w-auto xxs:bg-green-100 xxs:px-6 xxs:py-4 xxs:my-3 xxs:mx-2'>
-                <CheckCircleIcon className='xxs:h-8 xxs:w-8 xxs:text-green-500 xxs:mr-1'/>
-                <span className='xxs:text-sm xxs:font-light'>Congratulations - you get FREE delivery!</span>
+                <CheckCircleIcon className='xxs:h-8 xxs:w-8 xxs:text-green-500 xxs:mr-1 sm:h-12 sm:w-12'/>
+                <span className='xxs:text-sm xxs:font-light sm:text-center'>Congratulations - you get FREE delivery!</span>
             </div>
         )
     } else return null
@@ -147,7 +152,7 @@ const FreeShippingCard = ({ isShipping }) => {
 
 const CheckoutCard = ({ cartTotal }) => {
     return (
-        <div className='xxs:fixed xxs:bottom-0 xxs:flex xxs:flex-col xxs:p-2 xxs:bg-white xxs:w-full xxs:border-t-1 xxs:border-gray-300'>
+        <div className='xxs:fixed xxs:bottom-0 xxs:flex xxs:flex-col xxs:p-2 xxs:bg-white xxs:w-full xxs:border-t-1 xxs:border-gray-300 sm:hidden'>
             <div className='xxs:flex xxs:flex-row xxs:justify-between xxs:mt-2'>
                 <span>Order Total</span>
                 <span className='xxs:font-semibold'>${Math.round(cartTotal * 100) / 100}</span>
