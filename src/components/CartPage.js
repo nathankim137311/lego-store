@@ -50,14 +50,19 @@ export default function CartPage() {
         setBag(newBag);  
     }
 
+    if (bag.length === 0) {
+
+    }
+
     return (
-        <>
-            <h1 className='xxs:mt-20 xxs:w-full xxs:px-2 sm:px-4' >My Bag ({totalItems})</h1>
-            <div className='xxs:p-1 xxs:mt-4 xxs:bg-gray-100 sm:flex sm:flex-row sm:mt-4'>
-                <ul className='xxs:bg-gray-100 xxs:mx-2 sm:w-2/3'>
-                    <h3 className='xxs:text-green-600 xxs:font-medium xxs:text-sm xxs:px-4 xxs:py-4 xxs:bg-white'>Available now</h3>
-                    {bag.map(item => {
+        <div className='bg-gray-100'>
+            <h1 className='xxs:pt-24 xxs:w-full xxs:px-2 sm:px-4' >My Bag ({totalItems})</h1>
+            <div className='xxs:p-1 xxs:mt-4 sm:flex sm:flex-row sm:mt-4'>
+                <ul className=' xxs:mx-2 sm:w-2/3'>
+                    {bag.length === 0 ? <EmptyBag /> : bag.map(item => {
                         return (
+                            <>
+                            <h3 className='xxs:text-green-600 xxs:font-medium xxs:text-sm xxs:px-4 xxs:py-4 xxs:bg-white'>Available now</h3>
                             <li className='xxs:flex xxs:flex-row xxs:justify-between xxs:py-4 xxs:border-b-1 xxs:border-gray-300 xxs:bg-white' key={item.item_id}>
                                 <div className='xxs:flex xxs:flex-row xxs:w-4/5 xxs:justify-between'>
                                     <div className='xxs:w-24'>
@@ -81,6 +86,7 @@ export default function CartPage() {
                                     <span className='xxs:text-sm xxs:text-blue-500 xxs:hover:cursor-pointer'>(Edit)</span>
                                 </div>
                             </li>
+                            </>
                         )
                     })}
                 </ul>
@@ -96,7 +102,7 @@ export default function CartPage() {
             </div>
             <CheckoutCard cartTotal={cartTotal} />
             <Navbar />
-        </>
+        </div>
     )
 }
 
@@ -161,6 +167,17 @@ const CheckoutCard = ({ cartTotal }) => {
                 <button className='xxs:h-12 xxs:w-1/2 xxs:bg-blue-600 xxs:text-white xxs:text-center xxs:rounded-md xxs:mr-2 hover:text-black hover:bg-white hover:border-2 hover:border-blue-600 '>Express Checkout</button>
                 <button className='xxs:h-12 xxs:w-1/2 xxs:bg-orange-400 xxs:rounded-md xxs:ml-2 hover:bg-white hover:border-2 hover:border-orange-400 '>Checkout</button>
             </div>
+        </div>
+    )
+}
+
+const EmptyBag = () => {
+    return (
+        <div className='xxs:flex xxs:flex-col xxs:items-center xxs:bg-white xxs:py-4 xxs:px-2'>
+            <h1 className='xxs:text-xl xxs:text-center'>You don't have anything in your bag</h1>
+            <span className='xxs:text-center xxs:text-sm xxs:text-gray-600 xxs:my-4'>Sign in to see your bag and get shopping!</span>
+            <button className='xxs:my-2 xxs:h-12 xxs:w-1/4 xxs:text-white xxs:bg-blue-600 xxs:rounded'>Sign In</button>
+            <Link className='xxs:my-1 xxs:font-light xxs:text-sm' to='/shop'>Start shopping {'>'}</Link>
         </div>
     )
 }
