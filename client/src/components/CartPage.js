@@ -232,7 +232,6 @@ const FreeShippingCard = ({ isShipping }) => {
 
 const CheckoutCard = ({ cartTotal, bag }) => {
     const redirectToCheckout = () => {
-        console.log('redirect to checkout');
         fetch('/create-checkout-session', {
             method: 'POST',
             headers: {
