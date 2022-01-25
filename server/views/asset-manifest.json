@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/static/css/main.c5097aec.css",
+    "main.js": "/static/js/main.27f5d93d.js",
+    "static/media/millennium.png": "/static/media/millennium.19a8c0e8cfa9c9720808.png",
+    "static/media/starwars-logo.png": "/static/media/starwars-logo.e1c386f5c1159f9a3e5b.png",
+    "static/media/Lego-logo.png": "/static/media/Lego-logo.d7cf77fce408225c90f4.png",
+    "index.html": "/index.html",
+    "main.c5097aec.css.map": "/static/css/main.c5097aec.css.map",
+    "main.27f5d93d.js.map": "/static/js/main.27f5d93d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.c5097aec.css",
+    "static/js/main.27f5d93d.js"
+  ]
+}
