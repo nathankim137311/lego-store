@@ -1,11 +1,12 @@
 require('dotenv').config()
-
 const express = require('express');
+const cors = require("cors")
 const app = express(); 
 const PORT = 3000; 
 const path = __dirname + '/views/';
 
 app.use(express.json());
+app.use(cors());
 app.use(express.static(path));
 
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY); 
@@ -24,9 +25,10 @@ app.post('/create-checkout-session', async (req, res) => {
                     price_data: {
                         currency: 'usd',
                         product_data: {
-                            name: item.set
+                            name: item.set, 
+                            images: item.images,
                         },
-                        unit_amount: (item.price + .99) * 100,
+                        unit_amount: item.price === 0 ? 0 : (item.price + 1) * 100,
                     },
                     quantity: item.quantity,
                 }
@@ -35,8 +37,8 @@ app.post('/create-checkout-session', async (req, res) => {
             cancel_url: `${process.env.SERVER_URL}/cancel.html`
         });
         res.json({ url: session.url });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
+    } catch (e) {
+        res.status(500).json({ error: e.message });
     }
 });
 

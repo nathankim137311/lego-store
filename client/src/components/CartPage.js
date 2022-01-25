@@ -69,7 +69,7 @@ export default function CartPage() {
                     </div>
                 </div>
             </div>
-            <CheckoutCard cartTotal={cartTotal} bag={bag} />
+            <CheckoutCard cartTotal={cartTotal} bag={bag} isShipping={isShipping} />
             <Navbar />
         </div>
     )
@@ -230,7 +230,15 @@ const FreeShippingCard = ({ isShipping }) => {
     } else return null
 }
 
-const CheckoutCard = ({ cartTotal, bag }) => {
+const CheckoutCard = ({ cartTotal, bag, isShipping }) => {
+    const newBag = [...bag];
+    newBag.push({
+        set: 'Shipping',
+        images: [],
+        price: isShipping ? 0 : 9,
+        quantity: 1, 
+    });
+
     const redirectToCheckout = () => {
         fetch('/create-checkout-session', {
             method: 'POST',
@@ -238,14 +246,15 @@ const CheckoutCard = ({ cartTotal, bag }) => {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                items: [...bag]
+                items: newBag,
             })
         }).then(res => {
             if (res.ok) return res.json();
+            return res.json().then(json => Promise.reject(json))
         }).then(({ url }) => {
             window.location = url
-        }).catch(err => {
-            console.log(err.error);
+        }).catch(e => {
+            console.error(e.error);
         });
     }
 
