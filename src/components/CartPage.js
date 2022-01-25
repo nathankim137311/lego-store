@@ -239,7 +239,7 @@ const CheckoutCard = ({ cartTotal }) => {
             </div>
             <div className='xxs:flex xxs:flex-row xxs:justify-between xxs:mt-4'>
                 <button className='xxs:h-12 xxs:w-1/2 xxs:bg-blue-600 xxs:text-white xxs:text-center xxs:rounded-md xxs:mr-2 hover:text-black hover:bg-white hover:border-2 hover:border-blue-600 '>Express Checkout</button>
-                <button className='xxs:h-12 xxs:w-1/2 xxs:bg-orange-400 xxs:rounded-md xxs:ml-2 hover:bg-white hover:border-2 hover:border-orange-400 '>Checkout</button>
+                <Link className='xxs:h-12 xxs:w-1/2 xxs:bg-orange-400 xxs:rounded-md xxs:ml-2 hover:bg-white hover:border-2 hover:border-orange-400 xxs:text-center xxs:leading-12'to='/checkout'>Checkout</Link>
             </div>
         </div>
     )
