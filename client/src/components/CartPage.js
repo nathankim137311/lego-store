@@ -69,7 +69,7 @@ export default function CartPage() {
                     </div>
                 </div>
             </div>
-            <CheckoutCard cartTotal={cartTotal} />
+            <CheckoutCard cartTotal={cartTotal} bag={bag} />
             <Navbar />
         </div>
     )
@@ -230,7 +230,26 @@ const FreeShippingCard = ({ isShipping }) => {
     } else return null
 }
 
-const CheckoutCard = ({ cartTotal }) => {
+const CheckoutCard = ({ cartTotal, bag }) => {
+    const redirectToCheckout = () => {
+        console.log('redirect to checkout');
+        fetch('/create-checkout-session', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                items: [...bag]
+            })
+        }).then(res => {
+            if (res.ok) return res.json();
+        }).then(({ url }) => {
+            window.location = url
+        }).catch(err => {
+            console.log(err.error);
+        });
+    }
+
     return (
         <div className='xxs:fixed xxs:bottom-0 xxs:flex xxs:flex-col xxs:p-2 xxs:bg-white xxs:w-full xxs:border-t-1 xxs:border-gray-300 sm:hidden'>
             <div className='xxs:flex xxs:flex-row xxs:justify-between xxs:mt-2'>
@@ -239,7 +258,9 @@ const CheckoutCard = ({ cartTotal }) => {
             </div>
             <div className='xxs:flex xxs:flex-row xxs:justify-between xxs:mt-4'>
                 <button className='xxs:h-12 xxs:w-1/2 xxs:bg-blue-600 xxs:text-white xxs:text-center xxs:rounded-md xxs:mr-2 hover:text-black hover:bg-white hover:border-2 hover:border-blue-600 '>Express Checkout</button>
-                <Link className='xxs:h-12 xxs:w-1/2 xxs:bg-orange-400 xxs:rounded-md xxs:ml-2 hover:bg-white hover:border-2 hover:border-orange-400 xxs:text-center xxs:leading-12'to='/checkout'>Checkout</Link>
+                <button className='xxs:h-12 xxs:w-1/2 xxs:bg-orange-400 xxs:rounded-md xxs:ml-2 hover:bg-white hover:border-2 hover:border-orange-400'
+                onClick={redirectToCheckout}
+                >Checkout</button>
             </div>
         </div>
     )
