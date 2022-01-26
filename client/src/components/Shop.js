@@ -12,7 +12,7 @@ export default function Shop() {
         const fetchProducts = async (page) => {
             if (page === 1) setLoading(true); 
             try {
-                let data = await fetch(`https://lego-star-wars-sets.p.rapidapi.com/api/products?page=${page}&limit=10`, {
+                let data = await fetch(`https://lego-star-wars-sets.p.rapidapi.com/api/products?page=${page}&limit=20`, {
                     "method": "GET",
                     "headers": {
                         "x-rapidapi-host": "lego-star-wars-sets.p.rapidapi.com",
