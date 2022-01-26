@@ -8,8 +8,6 @@ export default function ProductDetails({ product }) {
     const [bag, setBag] = bagArr;
     const [totalItems, setTotalItems] = totalItemsValue; 
 
-    const images = product.images.map(image => image.split('?')[0]);
-
     useEffect(() => {
         const sumQauntity = () => {
             if (bag.length !== 0) {
@@ -26,9 +24,6 @@ export default function ProductDetails({ product }) {
         <div className='xxs:p-4'>
             <div className='xxs:flex xxs:flex-col'>
                 <ImgSlider images={product.images} />
-                {/* <div className='xxs:bg-white xxs:w-full xxs:max-w-3xl'>
-                    <img className='xxs:w-full xxs:h-full xxs:object-contain' src={images[0]} alt="" />
-                </div> */}
                 <div className='xxs:mt-2'>
                     <div className='xxs:flex xxs:flex-row xxs:justify-between'>
                         <h1 className='xxs:text-xl'>{product.set}</h1>
@@ -144,7 +139,7 @@ const ImgSlider = ({ images }) => {
             </div>
             <div className='xxs:flex xxs:flex-row xxs:justify-center xxs:w-full xxs:py-2 xxs:mt-2'>
                 <button onClick={decrementIndex}>
-                    <ChevronLeftIcon className='xxs:h-8 xxs:w-8 xxs:bg-white xxs:rounded-full xxs:mr-2'/>
+                    <ChevronLeftIcon className='xxs:h-8 xxs:w-8 xxs:bg-white xxs:rounded-full xxs:mr-4'/>
                 </button>
                 {images.map((image, index) => {
                     return (
@@ -155,7 +150,7 @@ const ImgSlider = ({ images }) => {
                     )
                 })}
                 <button onClick={incrementIndex}>
-                    <ChevronRightIcon className='xxs:h-8 xxs:w-8 xxs:bg-white xxs:rounded-full xxs:ml-2' />
+                    <ChevronRightIcon className='xxs:h-8 xxs:w-8 xxs:bg-white xxs:rounded-full xxs:ml-4' />
                 </button>
             </div>
         </div>
