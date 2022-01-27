@@ -3,6 +3,33 @@
 @tailwind utilities;
 
 /* customize your own CSS utility classes */
+@layer utilities {
+  .scrollbar::-webkit-scrollbar {
+    width: .5rem;
+  }
+  .scrollbar::-webkit-scrollbar-thumb {
+    background: #27272E; 
+    border-radius: 1rem;
+  }
+  .scrollbar::-webkit-scrollbar-thumb:active {
+    background-color: #131314;
+  }
+  .scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #3B3B46; 
+    box-shadow: 0 0 2px 1px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Scroll track styles (Background) */
+  .scrollbar::-webkit-scrollbar-track {
+    background: #131314;
+    border-radius: 4px;
+  }
+  .scrollbar::-webkit-scrollbar-track:hover, 
+  .scrollbar::-webkit-scrollbar-track:active {
+    background: #131314;
+  }
+}
+
 @layer components { 
   .blue-btn {
     @apply flex flex-row items-center bg-blue-500 rounded-2xl mx-4 py-1 font-bold px-4 text-white
