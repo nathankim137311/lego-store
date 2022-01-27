@@ -53,11 +53,12 @@ export default function Home() {
           <p className='xxs:text-center xxs:text-sm'>Playing can go beyond building. Step outside of the expected and create your own LEGO® Star Wars™ masterpieces. Whether you’re an inspiring painter, a photographer or a filmmaker, you can make your own out-of-this-galaxy creations.</p>
           <button className='xxs:h-10 xxs:bg-white xxs:text-black xxs:w-1/2 xxs:mt-6 xxs:rounded hover:bg-black hover:text-white'>Learn more {'>'}</button>
         </div>
-        <div className='xxs:mx-2 xxs:text-center xxs:py-4 xxs:px-4 xxs:text-lg'>
+        <div className='xxs:flex xxs:flex-row xxs:items-center xxs:mx-2 xxs:text-left xxs:py-4 xxs:px-4 xxs:text-lg'>
           <span>Launch into the LEGO® Star Wars™ universe!</span>
+          <Link className='xxs:text-sm xxs:text-blue-500' to='/shop'>View more {'>'}</Link>
         </div>
         <div>
-          <ul className='xxs:flex xxs:flex-row xxs:overflow-x-scroll'>
+          <ul className='xxs:overflow-x-scroll xxs:snap-x xxs:snap-mandatory xxs:flex xxs:flex-row xxs:pl-8 scrollbar-auto scrollbar-thumb-blue-700 scrollbar-track-blue-300'>
             {previewItems.map(item => {
               return (
                 <ItemThumbnail item={item} />
@@ -74,7 +75,7 @@ export default function Home() {
 
 const ItemThumbnail = ({ item }) => {
   return (
-    <div className='xxs:flex xxs:flex-col xxs:px-2 xxs:py-4'>
+    <div className='xxs:flex xxs:flex-col xxs:px-2 xxs:py-4 xxs:snap-center xxs:snap-always'>
       <div className='xxs:flex xxs:flex-row xxs:justify-center xxs:items-center xxs:h-56 xxs:w-56 xxs:border-1 xxs:border-gray-300 xxs:py-2'>
         <img className='xxs:max-w-full xxs:max-h-full' src={item.images[0].split('?')[0]} alt="" />
       </div>
