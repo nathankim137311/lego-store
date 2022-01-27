@@ -57,7 +57,17 @@ fetch the data and use the url parameters as variables. When the user scrolls al
 fetch data function. When that function is called increment + 1 to the page count parameter and add the 
 items into an array. 
 
+const shipping = isShipping ? 0 : 9.99;  
+    const newBag = [...bag];
+    newBag.push({
+        set: 'Shipping',
+        images: [shippingPng],
+        price: shipping * 100,
+        quantity: 1, 
+    });
 
+    images: item.images[0].split('?')[0], 
 
+<a href="https://ibb.co/XZnVHpp"><img src="https://i.ibb.co/rGBv9MM/Pngtree-fast-delivery-truck-icon-graphic-4002523.png" alt="Pngtree-fast-delivery-truck-icon-graphic-4002523" border="0"></a><br /><a target='_blank' href='https://imgbb.com/'>upload image</a><br />
 
-
+add html files and render them when stripe payment is successful or cancelled. 

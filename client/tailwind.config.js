@@ -34,7 +34,11 @@ module.exports = {
       'xs': '575px', 
       ...defaultTheme.screens,
     },
-    extend: {},
+    extend: {
+      lineHeight: {
+        '12': '3rem',
+      }
+    },
   },
   plugins: [],
 }

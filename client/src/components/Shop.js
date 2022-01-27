@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Navbar from './Navbar'
 import starwarsLogo from '../png/starwars-logo.png'
 import ProductCard from './ProductCard';
+import Footer from './Footer';
 
 export default function Shop() {
     const [products, setProducts] = useState([]);
@@ -12,7 +13,7 @@ export default function Shop() {
         const fetchProducts = async (page) => {
             if (page === 1) setLoading(true); 
             try {
-                let data = await fetch(`https://lego-star-wars-sets.p.rapidapi.com/api/products?page=${page}&limit=10`, {
+                let data = await fetch(`https://lego-star-wars-sets.p.rapidapi.com/api/products?page=${page}&limit=20`, {
                     "method": "GET",
                     "headers": {
                         "x-rapidapi-host": "lego-star-wars-sets.p.rapidapi.com",
@@ -65,6 +66,7 @@ export default function Shop() {
             </div>
             <button className='xxs:w-full xxs:text-blue-600 xxs:mb-4' onClick={loadMore}>Load More</button>
             <Navbar />
+            <Footer /> 
         </>
     )
 }

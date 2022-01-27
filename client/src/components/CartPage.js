@@ -4,6 +4,7 @@ import { BagContext } from './BagContext';
 import { TrashIcon, MinusIcon, PlusIcon } from '@heroicons/react/outline'
 import { CheckCircleIcon } from '@heroicons/react/solid'
 import { Link } from 'react-router-dom';
+import Footer from './Footer';
 
 export default function CartPage() {
     const {bagArr, totalItemsValue} = useContext(BagContext); 
@@ -69,8 +70,9 @@ export default function CartPage() {
                     </div>
                 </div>
             </div>
-            <CheckoutCard cartTotal={cartTotal} />
+            <CheckoutCard cartTotal={cartTotal} bag={bag} isShipping={isShipping} />
             <Navbar />
+            <Footer />
         </div>
     )
 }
@@ -89,7 +91,7 @@ const ItemDetails = ({ item, bag, setBag }) => {
 
     return (
         <div className='xxs:flex xxs:flex-col xxs:border-b-1 xxs:border-gray-300 xxs:bg-white'>
-            <div className='xxs:flex xxs:flex-row xxs:justify-between xxs:py-4'>
+            <div className='xxs:flex xxs:flex-row xxs:justify-between xxs:py-4 xxs:px-2'>
                 <div className='xxs:flex xxs:flex-row xxs:w-4/5 xxs:justify-between'>
                     <div className='xxs:w-24'>
                         <img className='xxs:h-auto' src={item.images[0].split('?')[0]} alt={item.set} />
@@ -230,7 +232,34 @@ const FreeShippingCard = ({ isShipping }) => {
     } else return null
 }
 
-const CheckoutCard = ({ cartTotal }) => {
+const CheckoutCard = ({ cartTotal, bag, isShipping }) => {
+    const newBag = [...bag];
+    newBag.push({
+        set: 'Shipping',
+        images: [],
+        price: isShipping ? 0 : 9,
+        quantity: 1, 
+    });
+
+    const redirectToCheckout = () => {
+        fetch('/create-checkout-session', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                items: newBag,
+            })
+        }).then(res => {
+            if (res.ok) return res.json();
+            return res.json().then(json => Promise.reject(json))
+        }).then(({ url }) => {
+            window.location = url
+        }).catch(e => {
+            console.error(e.error);
+        });
+    }
+
     return (
         <div className='xxs:fixed xxs:bottom-0 xxs:flex xxs:flex-col xxs:p-2 xxs:bg-white xxs:w-full xxs:border-t-1 xxs:border-gray-300 sm:hidden'>
             <div className='xxs:flex xxs:flex-row xxs:justify-between xxs:mt-2'>
@@ -239,7 +268,9 @@ const CheckoutCard = ({ cartTotal }) => {
             </div>
             <div className='xxs:flex xxs:flex-row xxs:justify-between xxs:mt-4'>
                 <button className='xxs:h-12 xxs:w-1/2 xxs:bg-blue-600 xxs:text-white xxs:text-center xxs:rounded-md xxs:mr-2 hover:text-black hover:bg-white hover:border-2 hover:border-blue-600 '>Express Checkout</button>
-                <button className='xxs:h-12 xxs:w-1/2 xxs:bg-orange-400 xxs:rounded-md xxs:ml-2 hover:bg-white hover:border-2 hover:border-orange-400 '>Checkout</button>
+                <button className='xxs:h-12 xxs:w-1/2 xxs:bg-orange-400 xxs:rounded-md xxs:ml-2 hover:bg-white hover:border-2 hover:border-orange-400'
+                onClick={redirectToCheckout}
+                >Checkout</button>
             </div>
         </div>
     )
