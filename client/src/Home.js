@@ -1,11 +1,11 @@
 import './home.css';
 import Navbar from './components/Navbar';
-import millennium from './png/millennium.png';
 import Footer from './components/Footer';
 import starwarsLogo from './png/starwars-logo.png'
 import { Link } from 'react-router-dom';
 import darthVader from './jpg/darthvader.jpg';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
+import { BagContext } from './components/BagContext';
 
 export default function Home() {
   const [previewItems, setPreviewItems] = useState([]);
@@ -23,6 +23,7 @@ export default function Home() {
           }
       });
       data = await data.json();
+      data.products.forEach(product => product.quantity = 1);
 
       setPreviewItems(data.products);
       setLoading(false);
@@ -61,7 +62,9 @@ export default function Home() {
           <ul className='xxs:overflow-x-scroll xxs:snap-x xxs:snap-mandatory xxs:flex xxs:flex-row xxs:pl-8 scrollbar-auto scrollbar-thumb-blue-700 scrollbar-track-blue-300'>
             {previewItems.map(item => {
               return (
-                <ItemThumbnail item={item} />
+                <li key={item.item_id} >
+                  <ItemThumbnail item={item} />
+                </li>
               )
             })}
           </ul>
@@ -74,10 +77,48 @@ export default function Home() {
 }
 
 const ItemThumbnail = ({ item }) => {
+  const [limit, setLimit] = useState(false);
+  const {bagArr, totalItemsValue} = useContext(BagContext); 
+  const [bag, setBag] = bagArr;
+  const [totalItems, setTotalItems] = totalItemsValue;
+
+  useEffect(() => {
+    const sumQauntity = () => {
+        if (bag.length !== 0) {
+            const total = [...bag].reduce((prev, curr) => prev + curr.quantity, 0);
+            setTotalItems(total); 
+        } 
+    }
+
+    sumQauntity();
+  }, [bag, totalItems, setTotalItems]);
+
+  const addToBag = (item) => {
+    const bagItem = [...bag].find(product => product.item_id === item.item_id);
+
+    // if item not found
+    if (bagItem === undefined) {
+      const newBag = [...bag];
+      newBag.push(item);
+      setBag(newBag);
+    } else {
+      const newBag = [...bag].map(product => {
+        if (product.item_id === bagItem.item_id) {
+          if (product.quantity !== 3) product.quantity += 1;
+          else setLimit(true);
+        }
+
+        return item;
+      });
+
+      setBag(newBag);
+    }
+  }
+
   return (
     <div className='xxs:flex xxs:flex-col xxs:px-2 xxs:py-4 xxs:snap-center xxs:snap-always'>
       <div className='xxs:flex xxs:flex-row xxs:justify-center xxs:items-center xxs:h-56 xxs:w-56 xxs:border-1 xxs:border-gray-300 xxs:py-2'>
-        <img className='xxs:max-w-full xxs:max-h-full' src={item.images[0].split('?')[0]} alt="" />
+        <img className='xxs:max-w-full xxs:max-h-full' src={item.images[0].split('?')[0]} alt={item.set} />
       </div>
       <div className='xxs:flex xxs:flex-col'>
         <h3 className='xxs:text-left xxs:mt-2 xxs:h-14'>{item.set}</h3>
@@ -86,7 +127,10 @@ const ItemThumbnail = ({ item }) => {
             <span>{Math.round(item.rating * 10) / 10} / 5</span>
             <span className='xxs:font-semibold'>${item.price}.99</span>
           </div>
-          <button className='xxs:bg-orange-400 xxs:rounded xxs:px-2 xxs:ml-2 xxs:text-sm xxs:font-medium hover:xxs:bg-white hover:border-2 hover:border-orange-400'>Add to Bag</button>
+          <button 
+          className={limit ? 'xxs:bg-gray-600 xxs:rounded xxs:px-2 xxs:ml-2 xxs:text-sm xxs:font-medium xxs:text-white' : 'xxs:bg-orange-400 xxs:rounded xxs:px-2 xxs:ml-2 xxs:text-sm xxs:font-medium hover:xxs:bg-white hover:border-2 hover:border-orange-400'}
+          onClick={() => addToBag(item)}
+          >{limit ? 'Limit reached' : 'Add to Bag'}</button>
         </div>
       </div>
     </div>   
