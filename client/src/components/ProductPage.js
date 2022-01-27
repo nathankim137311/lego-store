@@ -3,6 +3,7 @@ import { useParams } from 'react-router';
 import Navbar from './Navbar';
 import ProductDetails from './ProductDetails';
 import { Link } from 'react-router-dom';
+import Footer from './Footer';
 
 export default function ProductPage() {
     const [product, setProduct] = useState([]);
@@ -52,6 +53,7 @@ export default function ProductPage() {
             </div>
             {product.length === 0 ? <></> : <ProductDetails product={product[0]} />}
             <Navbar />
+            <Footer />
         </>
     )
 }

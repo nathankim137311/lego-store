@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Navbar from './Navbar'
 import starwarsLogo from '../png/starwars-logo.png'
 import ProductCard from './ProductCard';
+import Footer from './Footer';
 
 export default function Shop() {
     const [products, setProducts] = useState([]);
@@ -65,6 +66,7 @@ export default function Shop() {
             </div>
             <button className='xxs:w-full xxs:text-blue-600 xxs:mb-4' onClick={loadMore}>Load More</button>
             <Navbar />
+            <Footer /> 
         </>
     )
 }

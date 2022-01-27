@@ -4,6 +4,7 @@ import { BagContext } from './BagContext';
 import { TrashIcon, MinusIcon, PlusIcon } from '@heroicons/react/outline'
 import { CheckCircleIcon } from '@heroicons/react/solid'
 import { Link } from 'react-router-dom';
+import Footer from './Footer';
 
 export default function CartPage() {
     const {bagArr, totalItemsValue} = useContext(BagContext); 
@@ -71,6 +72,7 @@ export default function CartPage() {
             </div>
             <CheckoutCard cartTotal={cartTotal} bag={bag} isShipping={isShipping} />
             <Navbar />
+            <Footer />
         </div>
     )
 }
@@ -89,7 +91,7 @@ const ItemDetails = ({ item, bag, setBag }) => {
 
     return (
         <div className='xxs:flex xxs:flex-col xxs:border-b-1 xxs:border-gray-300 xxs:bg-white'>
-            <div className='xxs:flex xxs:flex-row xxs:justify-between xxs:py-4'>
+            <div className='xxs:flex xxs:flex-row xxs:justify-between xxs:py-4 xxs:px-2'>
                 <div className='xxs:flex xxs:flex-row xxs:w-4/5 xxs:justify-between'>
                     <div className='xxs:w-24'>
                         <img className='xxs:h-auto' src={item.images[0].split('?')[0]} alt={item.set} />

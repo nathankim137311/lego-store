@@ -139,7 +139,7 @@ const ImgSlider = ({ images }) => {
             </div>
             <div className='xxs:flex xxs:flex-row xxs:justify-center xxs:w-full xxs:py-2 xxs:mt-2'>
                 <button onClick={decrementIndex}>
-                    <ChevronLeftIcon className='xxs:h-8 xxs:w-8 xxs:bg-white xxs:rounded-full xxs:mr-4'/>
+                    <ChevronLeftIcon className='xxs:h-8 xxs:w-8 xxs:bg-white xxs:rounded-full xxs:mr-2'/>
                 </button>
                 {images.map((image, index) => {
                     return (
@@ -150,7 +150,7 @@ const ImgSlider = ({ images }) => {
                     )
                 })}
                 <button onClick={incrementIndex}>
-                    <ChevronRightIcon className='xxs:h-8 xxs:w-8 xxs:bg-white xxs:rounded-full xxs:ml-4' />
+                    <ChevronRightIcon className='xxs:h-8 xxs:w-8 xxs:bg-white xxs:rounded-full xxs:ml-2' />
                 </button>
             </div>
         </div>
