@@ -10,6 +10,7 @@ import Shop from './components/Shop'
 import ProductPage from './components/ProductPage';
 import { BagProvider } from './components/BagContext';
 import CartPage from './components/CartPage';
+import Register from './components/Register';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -19,6 +20,7 @@ ReactDOM.render(
         <Route path='/shop' element={<Shop />} />
         <Route path='/shop/:id' element={<ProductPage />} />
         <Route path='/cart' element={<CartPage />} />
+        <Route path='/register' element={<Register />} />
       </Routes>
     </BagProvider>
   </BrowserRouter>,

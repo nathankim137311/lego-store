@@ -59,7 +59,7 @@ export default function Navbar() {
                             <SearchBar isSearch={ isSearch } handleSearch={ handleSearch } />
                         </li>
                         <li className='flex flex-row items-center justify-center xxs:mx-2 lg:mx-3'>
-                            <Link to='/account'>
+                            <Link to='/register'>
                                 <div className='flex flex-row justify-center items-center p-2 xxs:bg-blue-300 lg:bg-white rounded-full'>
                                     <img className='xxs:h-5 xxs:w-5 lg:h-6 lg:w-6' src={ legoHead } alt="" />
                                 </div>
