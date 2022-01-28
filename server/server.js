@@ -2,11 +2,13 @@ require('dotenv').config()
 const express = require('express');
 const cors = require("cors")
 const app = express(); 
-const PORT = 3000; 
+const PORT = 3001; 
 const path = __dirname + '/views/';
+const bodyParser = require('body-parser');
 
-app.use(express.json());
 app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path));
 
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY); 
@@ -40,6 +42,12 @@ app.post('/create-checkout-session', async (req, res) => {
     } catch (e) {
         res.status(500).json({ error: e.message });
     }
+});
+
+// Register 
+app.post('/api/register', (req, res) => {
+    console.log(req.body); 
+    res.json({ status: 'ok' });
 });
 
 app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`));

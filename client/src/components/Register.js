@@ -1,23 +1,38 @@
 import React, { useState } from 'react';
 
 export default function Register() {
-    const [email, setEmail] = useState(); 
-    const [password, setPassword] = useState();
+    const [email, setEmail] = useState(null); 
+    const [password, setPassword] = useState(null);
     const [country, setCountry] = useState("United States of America"); 
 
-    const registerUser = (e) => {
+    const registerUser = async (e) => {
         e.preventDefault();
-        const user = {
-            email: email,
-            password: password,
-            country: country
-        };
+        try {
+            const user = {
+                email,
+                password,
+                country,
+            }
+
+            const response = await fetch('http://localhost:3001/api/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json', 
+                },
+                body: JSON.stringify(user),
+            });
+            
+            const data = await response.json(); 
+            console.log(data.status);
+        } catch(err) {
+            console.log(err);
+        }
     }
 
     return (
     <div>
         <h1>Register</h1>
-        <form onSubmit={(e) => registerUser(e)}>
+        <form onSubmit={registerUser}>
             <label htmlFor="email">Email address</label>
             <input 
                 type="email" 
