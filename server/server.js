@@ -1,17 +1,21 @@
 require('dotenv').config()
 const express = require('express');
-const cors = require("cors")
+const cors = require("cors");
+const mongoose = require('mongoose');
+
 const app = express(); 
 const PORT = 3001; 
 const path = __dirname + '/views/';
 const bodyParser = require('body-parser');
+const User = require('./models/User');
+const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY); 
 
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path));
 
-const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY); 
+mongoose.connect(process.env.DB_CONNECT, () => console.log('connected to mongodb'));
 
 app.get('/', (req, res) => {
     res.sendFile(path + 'index.html');
@@ -45,9 +49,33 @@ app.post('/create-checkout-session', async (req, res) => {
 });
 
 // Register 
-app.post('/api/register', (req, res) => {
-    console.log(req.body); 
-    res.json({ status: 'ok' });
+app.post('/api/register', async (req, res) => {
+    console.log(req.body);
+
+    try {
+        const user = await User.create({
+            email: req.body.email,
+            password: req.body.password,
+            country: req.body.country,
+        });
+        res.json({ status: 'ok' });
+    } catch(err) {
+        return res.json({ status: 'error', error: 'Duplicate email'});
+    }
+});
+
+// Login
+app.post('/api/login', async (req, res) => {
+    const user = await User.findOne({
+        email: req.body.email,
+        password: req.body.password,
+    });
+
+    if (user) {
+        return res.json({ status: 'ok', user: true });
+    } else {
+        return res.json({ status: 'error', user: false});
+    }
 });
 
 app.listen(PORT, () => console.log(`Server running on PORT ${PORT}`));
