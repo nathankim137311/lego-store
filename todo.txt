@@ -71,3 +71,18 @@ const shipping = isShipping ? 0 : 9.99;
 <a href="https://ibb.co/XZnVHpp"><img src="https://i.ibb.co/rGBv9MM/Pngtree-fast-delivery-truck-icon-graphic-4002523.png" alt="Pngtree-fast-delivery-truck-icon-graphic-4002523" border="0"></a><br /><a target='_blank' href='https://imgbb.com/'>upload image</a><br />
 
 add html files and render them when stripe payment is successful or cancelled. 
+
+// adding authentication to react project
+build login / register components
+    create input elements 
+    submit function that posts data to server 
+    private routes 
+
+integrate in line validation for registering an account 
+
+connect routes to those components via react-router 
+    render components
+    validate with Joi
+
+block users from accessing features if you are not signed up or logged in. 
+
