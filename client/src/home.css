@@ -30,4 +30,7 @@
   .input-field {
     @apply xxs:h-12 xxs:w-full xxs:rounded-md xxs:border-2 xxs:px-4 focus:outline-none focus:border-blue-500;
   }
+  .confirm-btn {
+    @apply xxs:w-1/2 xxs:h-12 xxs:my-8 xxs:rounded-md;
+  }
 }

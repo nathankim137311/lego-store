@@ -18,8 +18,6 @@ export default function Register() {
         confirmPasswordValid: null,
     });
 
-    // if all three properties are true set button to blue else gray
-
     // Error
     const [error, setError] = useState({
         emailError: '',
@@ -27,9 +25,24 @@ export default function Register() {
         confirmPasswordError: '',
     });
 
+    const [isValidUser, setIsValidUser] = useState(false); 
+
     useEffect(() => { 
+        const isEmail = (email) => {
+            return /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+        }
+
         const validateUser = () => {
-            if (email === '') {
+            if (email === null) {
+                setError(prevError => ({
+                    ...prevError,
+                    emailError: '',
+                }));
+                setForm(prevForm => ({
+                    ...prevForm,
+                    emailValid: null,
+                }));
+            } else if (email === '') {
                 setError(prevError => ({
                     ...prevError,
                     emailError: 'Email is required',
@@ -38,9 +51,36 @@ export default function Register() {
                     ...prevForm,
                     emailValid: false,
                 }));
+            } else if (!isEmail(email)) {
+                setError(prevError => ({
+                    ...prevError,
+                    emailError: 'Email is not valid',
+                }));
+                setForm(prevForm => ({
+                    ...prevForm,
+                    emailValid: false,
+                }));
+            } else {
+                setError(prevError => ({
+                    ...prevError,
+                    emailError: '',
+                }));
+                setForm(prevForm => ({
+                    ...prevForm,
+                    emailValid: true,
+                }));
             }
-    
-            if (password === '') {
+
+            if (password === null) {
+                setError(prevError => ({
+                    ...prevError,
+                    passwordError: '',
+                }));
+                setForm(prevForm => ({
+                    ...prevForm,
+                    passwordValid: null,
+                }));
+            } else if (password === '') {
                 setError(prevError => ({
                     ...prevError,
                     passwordError: 'Password is required',
@@ -49,9 +89,36 @@ export default function Register() {
                     ...prevForm,
                     passwordValid: false,
                 }));
+            } else if (password.length < 10) {
+                setError(prevError => ({
+                    ...prevError,
+                    passwordError: 'Password is too short',
+                }));
+                setForm(prevForm => ({
+                    ...prevForm,
+                    passwordValid: false,
+                }));
+            } else {
+                setError(prevError => ({
+                    ...prevError,
+                    passwordError: '',
+                }));
+                setForm(prevForm => ({
+                    ...prevForm,
+                    passwordValid: true,
+                }));
             }
-    
-            if (confirmPassword !== password) {
+
+            if (confirmPassword === null) {
+                setError(prevError => ({
+                    ...prevError,
+                    confirmPasswordError: '',
+                }));
+                setForm(prevForm => ({
+                    ...prevForm,
+                    confirmPasswordValid: null,
+                }));
+            } else if (confirmPassword === '') {
                 setError(prevError => ({
                     ...prevError,
                     confirmPasswordError: 'Passwords do not match',
@@ -60,11 +127,35 @@ export default function Register() {
                     ...prevForm,
                     confirmPasswordValid: false,
                 }));
+            } else if (confirmPassword !== password) {
+                setError(prevError => ({
+                    ...prevError,
+                    confirmPasswordError: 'Passwords do not match',
+                }));
+                setForm(prevForm => ({
+                    ...prevForm,
+                    confirmPasswordValid: false,
+                }));
+            } else {
+                setError(prevError => ({
+                    ...prevError,
+                    confirmPasswordError: '',
+                }));
+                setForm(prevForm => ({
+                    ...prevForm,
+                    confirmPasswordValid: true,
+                }));
+            }
+
+            if (form.emailValid === true && form.passwordValid === true && form.confirmPasswordValid === true) {
+                setIsValidUser(true);
+            } else {
+                setIsValidUser(false);
             }
         }
 
         validateUser();
-    }, [form, error, email, password, confirmPassword]);
+    }, [form.emailValid, form.passwordValid, form.confirmPasswordValid, error.emailError, error.passwordError, error.confirmPasswordError, email, password, confirmPassword]);
 
     const registerUser = async (e) => {
         e.preventDefault();
@@ -385,7 +476,7 @@ export default function Register() {
                             <option value="Zambia">Zambia</option>
                             <option value="Zimbabwe">Zimbabwe</option>
                         </select>
-                        <button className='xxs:w-1/2 xxs:h-12 xxs:my-8 xxs:bg-blue-500 xxs:text-white xxs:rounded-md hover:bg-blue-800'>Confirm</button>
+                        <button className={isValidUser ? 'confirm-btn xxs:bg-blue-500 xxs:text-white' : 'confirm-btn xxs:bg-gray-500 xxs:text-white xxs:cursor-not-allowed'}>Confirm</button>
                     </form>
                 </div>
             </div>
