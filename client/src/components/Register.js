@@ -513,7 +513,7 @@ const SocialMediaAccounts = () => {
     )
 }
 
-const PrivacyCookies = () => {
+export const PrivacyCookies = () => {
     return (
         <div className='fixed bottom-0 right-5 bg-slate-100 border-1 border-gray-300 px-2 rounded-t-lg'>
             <span className='text-xs text-blue-500'>
