@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import legoLogo from '../png/Lego-logo.png';
 import legoBusinessMan from '../png/legoBusinessMan.png';
@@ -8,7 +8,63 @@ import { FcGoogle } from 'react-icons/fc';
 export default function Register() {
     const [email, setEmail] = useState(null); 
     const [password, setPassword] = useState(null);
+    const [confirmPassword, setConfirmPassword] = useState(null);
     const [country, setCountry] = useState("United States of America"); 
+
+    // Form
+    const [form, setForm] = useState({
+        emailValid: null,
+        passwordValid: null,
+        confirmPasswordValid: null,
+    });
+
+    // if all three properties are true set button to blue else gray
+
+    // Error
+    const [error, setError] = useState({
+        emailError: '',
+        passwordError: '',
+        confirmPasswordError: '',
+    });
+
+    useEffect(() => { 
+        const validateUser = () => {
+            if (email === '') {
+                setError(prevError => ({
+                    ...prevError,
+                    emailError: 'Email is required',
+                }));
+                setForm(prevForm => ({
+                    ...prevForm,
+                    emailValid: false,
+                }));
+            }
+    
+            if (password === '') {
+                setError(prevError => ({
+                    ...prevError,
+                    passwordError: 'Password is required',
+                }));
+                setForm(prevForm => ({
+                    ...prevForm,
+                    passwordValid: false,
+                }));
+            }
+    
+            if (confirmPassword !== password) {
+                setError(prevError => ({
+                    ...prevError,
+                    confirmPasswordError: 'Passwords do not match',
+                }));
+                setForm(prevForm => ({
+                    ...prevForm,
+                    confirmPasswordValid: false,
+                }));
+            }
+        }
+
+        validateUser();
+    }, [form, error, email, password, confirmPassword]);
 
     const registerUser = async (e) => {
         e.preventDefault();
@@ -52,24 +108,36 @@ export default function Register() {
                     <form className='xxs:mt-4 xxs:flex xxs:flex-col xxs:items-center' onSubmit={registerUser}>
                         <label className='xxs:text-sm xxs:mt-4 xxs:mb-2 block xxs:font-light xxs:w-full' htmlFor="email">Email address</label>
                         <input 
-                            className='input-field'
+                            className={form.emailValid ? 'input-field xxs:border-green-500' : form.emailValid === null ? 'input-field xxs:border-gray-300' : 'input-field xxs:border-red-600'}
                             type="email" 
                             id='email' 
                             name='email' 
                             placeholder="example@domain.com" 
-                            onChange={(e) => setEmail(e.target.value)}
+                            onBlur={(e) => setEmail(e.target.value)}
                         />
+                        <small className='xxs:w-full xxs:text-left xxs:mt-1 xxs:text-red-600'>{error.emailError}</small>
                         <label className='xxs:text-sm xxs:mt-4 xxs:mb-2 block xxs:font-light xxs:w-full' htmlFor="password">Password</label>
                         <input 
-                            className='input-field'
+                            className={form.passwordValid ? 'input-field xxs:border-green-500' : form.passwordValid === null ? 'input-field xxs:border-gray-300' : 'input-field xxs:border-red-600'}
                             type="password" 
                             id='password' 
                             name='password' 
                             placeholder="********" 
-                            onChange={(e) => setPassword(e.target.value)}
+                            onBlur={(e) => setPassword(e.target.value)}
                         />
+                        <small className='xxs:w-full xxs:text-left xxs:mt-1 xxs:text-red-600'>{error.passwordError}</small>
+                        <label className='xxs:text-sm xxs:mt-4 xxs:mb-2 block xxs:font-light xxs:w-full' htmlFor="password">Confirm password</label>
+                        <input 
+                            className={form.confirmPasswordValid ? 'input-field xxs:border-green-500' : form.confirmPasswordValid === null ? 'input-field xxs:border-gray-300' : 'input-field xxs:border-red-600'}
+                            type="password" 
+                            id='password' 
+                            name='password' 
+                            placeholder="********" 
+                            onBlur={(e) => setConfirmPassword(e.target.value)}
+                        />
+                        <small className='xxs:w-full xxs:text-left xxs:mt-1 xxs:text-red-600'>{error.confirmPasswordError}</small>
                         <label className='xxs:text-sm xxs:mt-4 xxs:mb-2 block xxs:font-light xxs:w-full' htmlFor="country">Country</label>
-                        <select className='input-field xxs:bg-white xxs:text-sm xxs:font-light' value={country} onChange={(e) => setCountry(e.target.value)} id="country" name="country" >
+                        <select className='input-field xxs:bg-white xxs:text-sm xxs:font-light xxs:border-gray-300' value={country} onChange={(e) => setCountry(e.target.value)} id="country" name="country" >
                             <option value="Afganistan">Afghanistan</option>
                             <option value="Albania">Albania</option>
                             <option value="Algeria">Algeria</option>
@@ -328,9 +396,9 @@ export default function Register() {
 
 const AccountHeader = () => {
     return (
-        <header className='xxs:fixed xxs:top-0 xxs:w-full xxs:bg-yellow-300 xxs:flex xxs:flex-row xxs:justify-center xxs:items-center xxs:py-3'>
+        <header className='xxs:absolute xxs:top-0 xxs:w-full xxs:bg-yellow-300 xxs:flex xxs:flex-row xxs:justify-center xxs:items-center xxs:py-3'>
             <img className='xxs:h-8' src={legoLogo} alt="lego logo" />
-            <h1 className='xxs:text-xl xxs:font-bold xxs:tracking-wide' >Account</h1>
+            <h1 className='xxs:text-xl xxs:font-bold xxs:tracking-wide'>Account</h1>
         </header>
     )
 }
