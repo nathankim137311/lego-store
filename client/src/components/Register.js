@@ -25,6 +25,7 @@ export default function Register() {
         confirmPasswordError: '',
     });
 
+    // Valid forms
     const [isValidUser, setIsValidUser] = useState(false); 
 
     useEffect(() => { 
@@ -155,29 +156,31 @@ export default function Register() {
         }
 
         validateUser();
-    }, [form.emailValid, form.passwordValid, form.confirmPasswordValid, error.emailError, error.passwordError, error.confirmPasswordError, email, password, confirmPassword]);
+    }, [form.emailValid, form.passwordValid, form.confirmPasswordValid, error.emailError, error.passwordError, error.confirmPasswordError, email, password, confirmPassword, isValidUser]);
 
     const registerUser = async (e) => {
         e.preventDefault();
-        try {
-            const user = {
-                email,
-                password,
-                country,
+        if (isValidUser) {
+            try {
+                const user = {
+                    email,
+                    password,
+                    country,
+                }
+    
+                const response = await fetch('http://localhost:3001/api/register', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json', 
+                    },
+                    body: JSON.stringify(user),
+                });
+                
+                const data = await response.json(); 
+                console.log(data.status);
+            } catch(err) {
+                console.log(err);
             }
-
-            const response = await fetch('http://localhost:3001/api/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json', 
-                },
-                body: JSON.stringify(user),
-            });
-            
-            const data = await response.json(); 
-            console.log(data.status);
-        } catch(err) {
-            console.log(err);
         }
     }
 
