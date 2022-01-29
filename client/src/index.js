@@ -11,6 +11,7 @@ import ProductPage from './components/ProductPage';
 import { BagProvider } from './components/BagContext';
 import CartPage from './components/CartPage';
 import Register from './components/Register';
+import Login from './components/Login';
 
 ReactDOM.render(
   <BrowserRouter>
@@ -21,6 +22,7 @@ ReactDOM.render(
         <Route path='/shop/:id' element={<ProductPage />} />
         <Route path='/cart' element={<CartPage />} />
         <Route path='/register' element={<Register />} />
+        <Route path='/login' element={<Login />} />
       </Routes>
     </BagProvider>
   </BrowserRouter>,

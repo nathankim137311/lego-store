@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import legoLogo from '../png/Lego-logo.png'
 
 export default function Login() {
     const [email, setEmail] = useState(null); 
@@ -29,7 +30,7 @@ export default function Login() {
 
     return (
     <div>
-        <h1>Register</h1>
+        <h1>Create your adult LEGO Account</h1>
         <form onSubmit={loginUser}>
             <label htmlFor="email">Email address</label>
             <input 
@@ -50,4 +51,13 @@ export default function Login() {
         </form>
     </div>
   )
+}
+
+const accountHeader = () => {
+    return (
+        <header>
+            <img src={legoLogo} alt="lego logo" />
+            <h1>Account</h1>
+        </header>
+    )
 }

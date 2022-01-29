@@ -27,4 +27,7 @@
   .limit-btn {
     @apply h-12 w-full bg-gray-600 text-white rounded-md text-sm font-medium cursor-default;
   }
+  .input-field {
+    @apply xxs:h-12 xxs:w-full xxs:rounded-md xxs:border-2 xxs:border-gray-300 xxs:px-4;
+  }
 }

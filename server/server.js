@@ -51,13 +51,14 @@ app.post('/create-checkout-session', async (req, res) => {
 // Register 
 app.post('/api/register', async (req, res) => {
     console.log(req.body);
+    const user = await User.create({
+        email: req.body.email,
+        password: req.body.password,
+        country: req.body.country,
+    });
 
     try {
-        const user = await User.create({
-            email: req.body.email,
-            password: req.body.password,
-            country: req.body.country,
-        });
+        const savedUser = await user.save();
         res.json({ status: 'ok' });
     } catch(err) {
         return res.json({ status: 'error', error: 'Duplicate email'});
