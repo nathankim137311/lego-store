@@ -10,10 +10,17 @@ const bodyParser = require('body-parser');
 const User = require('./models/User');
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY); 
 
+//Import Routes 
+const authRoute = require('./routes/auth');
+
+// Middlewares
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(path));
+
+// Route Middlewares
+app.use('/api/user', authRoute);
 
 mongoose.connect(process.env.DB_CONNECT, () => console.log('connected to mongodb'));
 
@@ -45,37 +52,6 @@ app.post('/create-checkout-session', async (req, res) => {
         res.json({ url: session.url });
     } catch (e) {
         res.status(500).json({ error: e.message });
-    }
-});
-
-// Register 
-app.post('/api/register', async (req, res) => {
-    console.log(req.body);
-    const user = await User.create({
-        email: req.body.email,
-        password: req.body.password,
-        country: req.body.country,
-    });
-
-    try {
-        const savedUser = await user.save();
-        res.json({ status: 'ok' });
-    } catch(err) {
-        return res.json({ status: 'error', error: 'Duplicate email'});
-    }
-});
-
-// Login
-app.post('/api/login', async (req, res) => {
-    const user = await User.findOne({
-        email: req.body.email,
-        password: req.body.password,
-    });
-
-    if (user) {
-        return res.json({ status: 'ok', user: true });
-    } else {
-        return res.json({ status: 'error', user: false});
     }
 });
 
