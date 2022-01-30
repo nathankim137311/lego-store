@@ -58,8 +58,8 @@ export default function Home() {
           <span>Launch into the LEGO® Star Wars™ universe!</span>
           <Link className='xxs:text-sm xxs:text-blue-500' to='/shop'>View more {'>'}</Link>
         </div>
-        <div>
-          <ul className='xxs:overflow-x-scroll xxs:snap-x xxs:snap-mandatory xxs:flex xxs:flex-row xxs:pl-8 scrollbar-auto scrollbar-thumb-blue-700 scrollbar-track-blue-300'>
+        <div className='xxs:px-4 xxs:pb-3'>
+          <ul className='xxs:overflow-x-scroll xxs:snap-x xxs:snap-mandatory xxs:flex xxs:flex-row xxs:pl-8 xxs:scrollbar'>
             {previewItems.map(item => {
               return (
                 <li key={item.item_id} >

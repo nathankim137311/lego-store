@@ -43,19 +43,19 @@ export default function Login() {
                     <label className='xxs:text-sm xxs:mt-4 xxs:mb-2 block xxs:font-light xxs:w-full' htmlFor="email">Email address</label>
                     <input 
                         className='input-field'
-                        type="email" 
+                        type='email' 
                         id='email' 
                         name='email' 
-                        placeholder="example@domain.com" 
+                        placeholder='example@domain.com' 
                         onChange={(e) => setEmail(e.target.value)}
                     />
                     <label className='xxs:text-sm xxs:mt-4 xxs:mb-2 block xxs:font-light xxs:w-full' htmlFor="password">Password</label>
                     <input 
                         className='input-field'
-                        type="password" 
+                        type='password' 
                         id='password' 
                         name='password' 
-                        placeholder="********" 
+                        placeholder='********' 
                         onChange={(e) => setPassword(e.target.value)}
                     />
                     <button className='confirm-btn xxs:bg-blue-500 xxs:text-white' >Log in</button>
