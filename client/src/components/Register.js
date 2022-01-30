@@ -34,7 +34,16 @@ export default function Register() {
         }
 
         const validateUser = () => {
-            if (email === null) {
+            if (email === 'server error') {
+                setError(prevError => ({
+                    ...prevError,
+                    emailError: 'Email already exists',
+                }));
+                setForm(prevForm => ({
+                    ...prevForm,
+                    emailValid: false,
+                }));
+            } else if (email === null) {
                 setError(prevError => ({
                     ...prevError,
                     emailError: '',
@@ -177,7 +186,12 @@ export default function Register() {
                 });
                 
                 const data = await response.json(); 
-                console.log(data.status);
+
+                // Handle server side errors 
+                if (data.error) {
+                    setEmail('server error'); 
+                }
+
             } catch(err) {
                 console.log(err);
             }

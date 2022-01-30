@@ -7,7 +7,6 @@ const app = express();
 const PORT = 3001; 
 const path = __dirname + '/views/';
 const bodyParser = require('body-parser');
-const User = require('./models/User');
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY); 
 
 //Import Routes 
