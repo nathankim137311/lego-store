@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { PrivacyCookies } from './Register';
 import legoLogo from '../png/Lego-logo.png';
 import boxerMinifig from '../png/boxerMinifig.png';
 import { XIcon, ExclamationCircleIcon, CheckCircleIcon } from '@heroicons/react/solid'
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import { BsFacebook, BsApple } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
 
@@ -43,19 +43,24 @@ export default function Login() {
 
             // if there are any errors
             if (data.error) {
+                // scroll to top
+                window.scrollTo({
+                    top: 0, 
+                    behavior: 'smooth'
+                });
                 setErrorMsg(data.error); 
                 setError(true);  
             }
 
-            // scroll to top
-            window.scrollTo({
-                top: 0, 
-                behavior: 'smooth'
-            });
-
         } catch(err) {
             console.log(err);
         }
+    }
+
+    if (error === false) {
+        return (
+            <Navigate replace to='/dashboard' />
+        )
     }
 
     return (
