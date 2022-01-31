@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PrivacyCookies } from './Register';
 import legoLogo from '../png/Lego-logo.png';
 import boxerMinifig from '../png/boxerMinifig.png';
-import { XIcon } from '@heroicons/react/solid'
+import { XIcon, ExclamationCircleIcon, CheckCircleIcon } from '@heroicons/react/solid'
 import { Link } from 'react-router-dom';
 import { BsFacebook, BsApple } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
@@ -10,6 +10,11 @@ import { FcGoogle } from 'react-icons/fc';
 export default function Login() {
     const [email, setEmail] = useState(null); 
     const [password, setPassword] = useState(null);
+    // Form error
+    const [error, setError] = useState(null); 
+    const [errorMsg, setErrorMsg] = useState(''); 
+    // Form success
+    const [successMsg, setSuccessMsg] = useState('');
 
     const loginUser = async (e) => {
         e.preventDefault();
@@ -19,16 +24,35 @@ export default function Login() {
                 password,
             }
 
-            const response = await fetch('http://localhost:3001/api/login', {
+            const response = await fetch('http://localhost:3001/api/user/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json', 
                 },
                 body: JSON.stringify(user),
             });
-            
+
             const data = await response.json(); 
-            console.log(data.status);
+
+            // if user logs in successfully
+            if (data.token) {
+                localStorage.setItem('token', data.token); // store token in localStorage
+                setSuccessMsg('Successfully logged in!')
+                setError(false);
+            } 
+
+            // if there are any errors
+            if (data.error) {
+                setErrorMsg(data.error); 
+                setError(true);  
+            }
+
+            // scroll to top
+            window.scrollTo({
+                top: 0, 
+                behavior: 'smooth'
+            });
+
         } catch(err) {
             console.log(err);
         }
@@ -37,6 +61,7 @@ export default function Login() {
     return (
         <>
             <AccountHeader />
+            {error ? <ErrorMessage message={errorMsg} /> : error == null ? <></> : <SuccessMessage message={successMsg} />}
             <div className='xxs:bg-gray-100 xxs:px-4 xxs:pt-8 xxs:pb-4'>
                 <img src={boxerMinifig} alt="Minifigure surfing" />
                 <form className='xxs:mt-4 xxs:flex xxs:flex-col xxs:items-center' onSubmit={loginUser}>
@@ -93,5 +118,23 @@ const AccountHeader = () => {
                 <XIcon className='xxs:h-9 xxs:w-9 xxs:absolute xxs:right-2 xxs:top-1/2 -translate-y-1/2' />
             </Link>
         </header>
+    )
+}
+
+const ErrorMessage = ({ message }) => {
+    return (
+        <div className='xxs:flex xxs:flex-row xxs:justify-center xxs:items-center xxs:px-2 xxs:py-4 xxs:bg-red-200'>
+            <ExclamationCircleIcon className='xxs:h-6 xxs:w-6 xxs:mx-1 xxs:text-red-600' />
+            <span className='xxs:text-black xxs:text-sm xxs:mx-1'>{message}</span>
+        </div>
+    )
+}
+
+const SuccessMessage = ({ message }) => {
+    return (
+        <div className='xxs:flex xxs:flex-row xxs:justify-center xxs:items-center xxs:px-2 xxs:py-4 xxs:bg-green-200'>
+            <CheckCircleIcon className='xxs:h-6 xxs:w-6 xxs:mx-1 xxs:text-green-600' />
+            <span className='xxs:text-black xxs:text-sm xxs:mx-1'>{message}</span>
+        </div>
     )
 }

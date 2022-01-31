@@ -11,6 +11,7 @@ const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
 //Import Routes 
 const authRoute = require('./routes/auth');
+const verifyToken = require('./routes/verify');
 
 // Middlewares
 app.use(cors());
@@ -23,10 +24,16 @@ app.use('/api/user', authRoute);
 
 mongoose.connect(process.env.DB_CONNECT, () => console.log('connected to mongodb'));
 
+// Get home page 
 app.get('/', (req, res) => {
     res.sendFile(path + 'index.html');
 });
 
+app.get('/watchlist', verifyToken, (req, res) => {
+    res.status(200).send("Welcome Back!"); 
+});
+
+// Create checkout session 
 app.post('/create-checkout-session', async (req, res) => {
     try {
         const session = await stripe.checkout.sessions.create({
