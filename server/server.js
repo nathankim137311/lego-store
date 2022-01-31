@@ -11,7 +11,7 @@ const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY);
 
 //Import Routes 
 const authRoute = require('./routes/auth');
-const verifyToken = require('./routes/verify');
+const dashboardRoute = require('./routes/dashboard');
 
 // Middlewares
 app.use(cors());
@@ -21,16 +21,13 @@ app.use(express.static(path));
 
 // Route Middlewares
 app.use('/api/user', authRoute);
+app.use('/api', dashboardRoute);
 
 mongoose.connect(process.env.DB_CONNECT, () => console.log('connected to mongodb'));
 
 // Get home page 
 app.get('/', (req, res) => {
     res.sendFile(path + 'index.html');
-});
-
-app.get('/watchlist', verifyToken, (req, res) => {
-    res.status(200).send("Welcome Back!"); 
 });
 
 // Create checkout session 
