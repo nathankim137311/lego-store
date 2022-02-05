@@ -3,7 +3,7 @@ import { PrivacyCookies } from './Register';
 import legoLogo from '../png/Lego-logo.png';
 import boxerMinifig from '../png/boxerMinifig.png';
 import { XIcon, ExclamationCircleIcon, CheckCircleIcon } from '@heroicons/react/solid'
-import { Link, Navigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { BsFacebook, BsApple } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
 
@@ -15,6 +15,8 @@ export default function Login() {
     const [errorMsg, setErrorMsg] = useState(''); 
     // Form success
     const [successMsg, setSuccessMsg] = useState('');
+
+    let navigate = useNavigate();
 
     const loginUser = async (e) => {
         e.preventDefault();
@@ -35,9 +37,17 @@ export default function Login() {
             const data = await response.json(); 
 
             // if user logs in successfully
-            if (data.token) {
+            if (data.status) {
+                // scroll to top
+                window.scrollTo({
+                    top: 0, 
+                    behavior: 'smooth'
+                });
                 localStorage.setItem('token', data.token); // store token in localStorage
-                setSuccessMsg('Successfully logged in!')
+                setSuccessMsg('Successfully logged in!');
+                setTimeout(() => {
+                    navigate('/dashboard');
+                }, 3000);
                 setError(false);
             } 
 
@@ -57,16 +67,11 @@ export default function Login() {
         }
     }
 
-    if (error === false) {
-        return (
-            <Navigate replace to='/dashboard' />
-        )
-    }
-
     return (
         <>
             <AccountHeader />
-            {error ? <ErrorMessage message={errorMsg} /> : error == null ? <></> : <SuccessMessage message={successMsg} />}
+            {error === false && <SuccessMessage message={successMsg} />}
+            {error === true && <ErrorMessage message={errorMsg} />}
             <div className='xxs:bg-gray-100 xxs:px-4 xxs:pt-8 xxs:pb-4'>
                 <img src={boxerMinifig} alt="Minifigure surfing" />
                 <form className='xxs:mt-4 xxs:flex xxs:flex-col xxs:items-center' onSubmit={loginUser}>
@@ -88,7 +93,12 @@ export default function Login() {
                         placeholder='********' 
                         onChange={(e) => setPassword(e.target.value)}
                     />
-                    <button className='confirm-btn xxs:bg-blue-500 xxs:text-white' >Log in</button>
+                    <button 
+                        className='confirm-btn xxs:bg-blue-500 xxs:text-white' 
+                        onClick={loginUser}
+                        >
+                        Log in
+                    </button>
                 </form>
                 <div className='xxs:flex xxs:flex-col xxs:items-center'>
                     <span className='xxs:text-sm xxs:font-light' >Don't have a LEGO Account?</span>
@@ -130,7 +140,7 @@ const ErrorMessage = ({ message }) => {
     return (
         <div className='xxs:flex xxs:flex-row xxs:justify-center xxs:items-center xxs:px-2 xxs:py-4 xxs:bg-red-200'>
             <ExclamationCircleIcon className='xxs:h-6 xxs:w-6 xxs:mx-1 xxs:text-red-600' />
-            <span className='xxs:text-black xxs:text-sm xxs:mx-1'>{message}</span>
+            <span className='xxs:text-red-800 xxs:text-sm xxs:mx-1'>{message}</span>
         </div>
     )
 }

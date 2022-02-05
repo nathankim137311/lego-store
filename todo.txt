@@ -86,3 +86,5 @@ connect routes to those components via react-router
 
 block users from accessing features if you are not signed up or logged in. 
 
+username: mikeadossi@gmail.com, password: tw83#r!HHp
+

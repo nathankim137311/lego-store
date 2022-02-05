@@ -4,6 +4,7 @@ import legoLogo from '../png/Lego-logo.png';
 import legoBusinessMan from '../png/legoBusinessMan.png';
 import { BsFacebook, BsApple } from 'react-icons/bs';
 import { FcGoogle } from 'react-icons/fc';
+import { useNavigate } from 'react-router-dom';
 
 export default function Register() {
     const [email, setEmail] = useState(null); 
@@ -27,6 +28,8 @@ export default function Register() {
 
     // Valid forms
     const [isValidUser, setIsValidUser] = useState(false); 
+
+    let navigate = useNavigate(); 
 
     useEffect(() => { 
         const isEmail = (email) => {
@@ -169,6 +172,9 @@ export default function Register() {
 
     const registerUser = async (e) => {
         e.preventDefault();
+        setTimeout(() => {
+            navigate('/login');
+        }, 3000);
         if (isValidUser) {
             try {
                 const user = {
