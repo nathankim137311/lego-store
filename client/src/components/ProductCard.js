@@ -42,19 +42,19 @@ export default function ProductCard({ product }) {
     }
 
     return (
-        <div className='xxs:flex xxs:flex-col xxs:items-center' key={product.item_id}>
-            <Link className='xxs:flex xxs:flex-row xxs:items-center xxs:justify-center xxs:h-36 xxs:w-full xxs:pt-2' to={`/shop/${product.item_id}`}>
+        <div className='xxs:flex xxs:flex-col xxs:items-center xxs:border-1' key={product.item_id}>
+            <Link className='xxs:flex xxs:flex-row xxs:items-center xxs:justify-center xxs:h-36 xxs:w-full xxs:pt-2 sm:h-52 sm:my-8' to={`/shop/${product.item_id}`}>
                 <img className='xxs:w-full xxs:h-full xxs:object-contain' src={product.images[0].split('?')[0]} alt={product.set} />
             </Link>
             <div className='xxs:flex xxs:flex-col xxs:items-center xxs:w-full xxs:p-2'>
-                <Link className='xxs:text-left xxs:h-20 xxs:w-full hover:underline' to={`/shop/${product.item_id}`}>
+                <Link className='xxs:text-left xxs:h-20 xxs:w-full xxs:font-medium hover:underline' to={`/shop/${product.item_id}`}>
                     {product.set}
                 </Link>
                 {/* ratings determine text color over 3.5 green under 3.5 is orange under 2 is red */}
                 <span className='xxs:text-left xxs:w-full'>{Math.round(product.rating * 10) / 10} / 5</span>
                 <span className='xxs:text-left xxs:w-full xxs:font-semibold xxs:mt-2 xxs:mb-2'>${product.price}.99</span>
                 <button 
-                className={limit ? 'limit-btn': 'orange-btn mb-2'}
+                className={limit ? 'limit-btn': 'orange-btn mb-2 sm:h-14'}
                 onClick={addToBag}
                 >{limit ? 'Limit Reached' : 'Add to Bag'}</button>
             </div>

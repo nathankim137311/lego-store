@@ -37,6 +37,9 @@ module.exports = {
     extend: {
       lineHeight: {
         '12': '3rem',
+      },
+      maxWidth: {
+        '8xl': '96rem',
       }
     },
   },

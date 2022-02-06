@@ -52,19 +52,19 @@ export default function Shop() {
 
     return (
         <> 
-            <div className='xxs:px-2'>
-                <img className='xxs:mt-16 xxs:mb-2 xxs:mx-auto xxs:h-20' src={ starwarsLogo } alt="Star Wars logo" />
-                <div className='xxs:bg-gray-200 xxs:px-2 xxs:py-4 xxs:text-sm xxs:text-justify'>
+            <div className='xxs:mx-2 xxs:mt-16 lg:mx-6 md:mt-20 lg:mt-24 2xl:mt-32 2xl:max-w-8xl 2xl:mx-auto'>
+                <img className='xxs:mb-2 xxs:mx-auto xxs:h-20 2xl:mb-10 2xl:h-24' src={ starwarsLogo } alt="Star Wars logo" />
+                <div className='xxs:bg-gray-200 xxs:px-2 xxs:py-4 xxs:text-sm xxs:text-justify xxs:mb-6 sm:px-4 sm:py-6 sm:mb-8 lg:py-8 2xl:mx-auto'>
                     <h2 className='xxs:text-xl xxs:font-semibold xxs:italic' >Star Wars</h2>
-                    <p className=''>Builders can join forces to build the iconic All-Stars from their favorite Star Wars movies. Control the action with the NEW Star Wars collection!</p>
+                    <p className='xxs:font-light' >Builders can join forces to build the iconic All-Stars from their favorite Star Wars movies. Control the action with the NEW Star Wars collection!</p>
                 </div>
-                <div className='xxs:grid xxs:grid-cols-2 xxs:w-auto xxs:pt-3'>
+                <div className='xxs:grid xxs:grid-cols-2 xxs:w-auto xxs:mt-3 xxs:border-1 xxs:border-gray-200 lg:grid-cols-3 xl:grid-cols-4'>
                     {products.map(product => {
                         return <ProductCard key={product.item_id} product={product} />
                     })}
                 </div>
             </div>
-            <button className='xxs:w-full xxs:text-blue-600 xxs:mb-4' onClick={loadMore}>Load More</button>
+            <button className='xxs:w-full xxs:text-blue-600 xxs:mt-4 xxs:mb-8 sm:mt-8 sm:mb-16' onClick={loadMore}>Load More</button>
             <Navbar />
             <Footer /> 
         </>

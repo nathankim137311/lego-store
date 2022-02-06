@@ -61,7 +61,7 @@ export default function Dashboard() {
         <>
             <div className='xxs:px-4 xxs:mt-14'>
                 <div className='xxs:py-2'>
-                    <span className='xxs:text-sm'><Link className='xxs:text-blue-500' to='/home'>Home</Link> {'>'} Account Overview</span>
+                    <span className='xxs:text-sm'><Link className='xxs:text-blue-500' to='/home'>Home</Link> {'>'} My Dashboard</span>
                 </div>
                 <h1 className='xxs:text-xl xxs:my-4'>My Dashboard</h1>
                 <LegoVipCard />

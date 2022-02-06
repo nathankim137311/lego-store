@@ -24,7 +24,7 @@ export default function Navbar() {
     return (
         <>
             <header className='fixed top-0 flex flex-row items-center xxs:h-14 md:h-16 lg:h-20 w-full xxs:bg-white lg:bg-yellow-300 xxs:border-b-2 xxs:border-yellow-300'>
-                <nav className='w-full flex flex-row justify-between xxs:mx-2 sm:mx-4 md:mx-14 lg:mx-22 xl:mx-28'>
+                <nav className='w-full flex flex-row justify-between xxs:mx-2 lg:mx-6 2xl:max-w-8xl 2xl:mx-auto'>
                     <ul className='flex flex-row items-center'>
                         <li className='relative flex flex-col items-center mx-2 lg:hidden'>
                             <button onClick={ handleClick }>
@@ -34,7 +34,7 @@ export default function Navbar() {
                         </li>
                         <li>
                             <Link to='/'>
-                                <img className='xxs:h-10 xxs:w-18 lg:h-14 lg:w-24' src={ legoLogo } alt="Lego logo" />
+                                <img className='xxs:h-10 xxs:w-18 lg:h-14 lg:w-14' src={ legoLogo } alt="Lego logo" />
                             </Link>
                         </li>
                     </ul>
