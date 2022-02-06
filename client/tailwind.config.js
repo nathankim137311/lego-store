@@ -40,6 +40,12 @@ module.exports = {
       },
       maxWidth: {
         '8xl': '96rem',
+      },
+      maxHeight: {
+        '152': '38rem',
+      },
+      height: {
+        '152': '38rem',
       }
     },
   },
