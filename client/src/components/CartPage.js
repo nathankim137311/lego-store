@@ -3,7 +3,7 @@ import Navbar from './Navbar'
 import { BagContext } from './BagContext';
 import { TrashIcon, MinusIcon, PlusIcon } from '@heroicons/react/outline'
 import { CheckCircleIcon } from '@heroicons/react/solid'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Footer from './Footer';
 
 export default function CartPage() {
@@ -48,8 +48,8 @@ export default function CartPage() {
 
     return (
         <div className='bg-gray-100'>
-            <h1 className='xxs:pt-24 xxs:w-full xxs:px-2 sm:px-4' >My Bag ({totalItems})</h1>
-            <div className='xxs:p-1 xxs:mt-4 sm:flex sm:flex-row sm:mt-4'>
+            <h1 className='xxs:pt-24 xxs:w-full xxs:px-2 sm:px-4 lg:mx-6 2xl:mx-auto 2xl:max-w-8xl' >My Bag ({totalItems})</h1>
+            <div className='xxs:p-1 xxs:mt-4 sm:flex sm:flex-row sm:mt-4 lg:mx-6 lg:p-0 2xl:mx-auto 2xl:max-w-8xl'>
                 <ul className=' xxs:mx-2 sm:w-2/3'>
                     {bag.length === 0 ? <></> : <h3 className='xxs:text-green-600 xxs:font-medium xxs:text-sm xxs:px-4 xxs:py-4 xxs:bg-white'>Available now</h3>}
                     {bag.length === 0 ? <EmptyBag /> : bag.map(item => {
@@ -64,9 +64,9 @@ export default function CartPage() {
                     <PromoCode />
                     <FreeShippingCard isShipping={isShipping} />
                     <OrderSummary totalItems={totalItems} orderValue={orderValue} isShipping={isShipping} cartTotal={cartTotal} />
-                    <div className='xxs:hidden sm:flex sm:flex-col sm:items-center sm:bg-white sm:mx-2 sm:py-4'>
-                        <button className='sm:my-2 sm:h-10 sm:w-4/5 sm:bg-orange-400 sm:rounded-md hover:bg-white hover:border-2 hover:border-orange-400'>Express Checkout</button>
-                        <button className='sm:my-2 sm:h-10 sm:w-4/5 sm:bg-blue-600 sm:text-white sm:rounded-md hover:bg-white hover:border-2 hover:border-blue-600 hover:text-black'>Checkout</button>
+                    <div className='xxs:hidden sm:flex sm:flex-col sm:items-center sm:bg-white sm:mx-2 sm:py-4 sm:mb-8 lg:mb-12'>
+                        <button className='sm:my-2 sm:h-10 sm:w-4/5 sm:bg-orange-400 sm:rounded-md hover:bg-white hover:border-2 hover:border-orange-400 lg:h-12'>Express Checkout</button>
+                        <button className='sm:my-2 sm:h-10 sm:w-4/5 sm:bg-blue-600 sm:text-white sm:rounded-md hover:bg-white hover:border-2 hover:border-blue-600 hover:text-black lg:h-12'>Checkout</button>
                     </div>
                 </div>
             </div>
@@ -185,7 +185,7 @@ const QuantitySelector = ({ item, bag, setBag, edit, setEdit }) => {
 const PromoCode = () => {
     return (
         <div className='xxs:mx-2 xxs:p-4 xxs:my-3 xxs:bg-white sm:mt-0'>
-            <h2>Enter a Promo Code</h2>
+            <h2 className='lg:text-xl' >Enter a Promo Code</h2>
             <p className='xxs:text-sm xxs:my-4 xxs:rounded-md xxs:text-gray-700'>Got a VIP Discount Code? You'll enter that later when you're checking out!</p>
             <div className='xxs:flex xxs:flex-row xxs:h-12'>
                 <input className='xxs:w-3/4 xxs:px-4 xxs:rounded-l-md xxs:border-1 xxs:border-gray-300' type="text" placeholder='Enter Code' />
@@ -198,7 +198,7 @@ const PromoCode = () => {
 const OrderSummary = ({ totalItems, orderValue, isShipping, cartTotal }) => {
     return (
         <div className='xxs:mx-2 xxs:p-4 xxs:my-3 xxs:bg-white'>
-            <h2 className='xxs:py-2 xxs:border-b-1 xxs:border-gray-300'>Order Summary</h2>
+            <h2 className='xxs:py-2 xxs:border-b-1 xxs:border-gray-300 lg:text-xl'>Order Summary</h2>
             <p className='xxs:text-sm xxs:my-2 xxs:rounded-md xxs:text-gray-700'>Enter a ZIP code to estimate tax and delivery</p>
             <div className='xxs:flex xxs:flex-row xxs:h-12 xxs:my-4'>
                 <input className='xxs:w-3/4 xxs:px-4 xxs:rounded-l-md xxs:border-1 xxs:border-gray-300' type="text" placeholder='Example: 98012' />
@@ -277,11 +277,18 @@ const CheckoutCard = ({ cartTotal, bag, isShipping }) => {
 }
 
 const EmptyBag = () => {
+    let navigate = useNavigate();
+
     return (
         <div className='xxs:flex xxs:flex-col xxs:items-center xxs:bg-white xxs:py-4 xxs:px-2'>
             <h1 className='xxs:text-xl xxs:text-center'>You don't have anything in your bag</h1>
             <span className='xxs:text-center xxs:text-sm xxs:text-gray-600 xxs:my-4'>Sign in to see your bag and get shopping!</span>
-            <button className='xxs:my-2 xxs:h-12 xxs:w-1/4 xxs:text-white xxs:bg-blue-600 xxs:rounded'>Sign In</button>
+            <button 
+            className='xxs:my-2 xxs:h-12 xxs:w-1/4 xxs:text-white xxs:bg-blue-600 xxs:rounded'
+            onClick={() => navigate('/login')}
+            >
+            Login
+            </button>
             <Link className='xxs:my-1 xxs:font-light xxs:text-sm' to='/shop'>Start shopping {'>'}</Link>
         </div>
     )
