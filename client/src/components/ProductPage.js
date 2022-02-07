@@ -45,7 +45,7 @@ export default function ProductPage() {
 
     return (
         <>
-            <div className='xxs:flex xxs:flex-row xxs:mt-16 xxs:w-full xxs:p-4 xxs:text-sm'>
+            <div className='xxs:flex xxs:flex-row xxs:mt-16 xxs:w-full xxs:p-4 xxs:text-sm lg:mt-20 lg:px-6 lg:max-w-8xl lg:mx-auto'>
                 <Link className='xxs:text-blue-400 xxs:mr-2' to='/shop'>
                     <h3>Shop {'>'}</h3>
                 </Link>

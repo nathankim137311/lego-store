@@ -3,6 +3,13 @@
 @tailwind utilities;
 
 /* customize your own CSS utility classes */
+@layer utilities {
+  .scrollbar {
+    scrollbar-color: black white; 
+    scrollbar-width: auto;
+  }
+}
+
 @layer components { 
   .blue-btn {
     @apply flex flex-row items-center bg-blue-500 rounded-2xl mx-4 py-1 font-bold px-4 text-white
@@ -26,5 +33,11 @@
   }
   .limit-btn {
     @apply h-12 w-full bg-gray-600 text-white rounded-md text-sm font-medium cursor-default;
+  }
+  .input-field {
+    @apply xxs:h-12 xxs:w-full xxs:rounded-md xxs:border-2 xxs:px-4 focus:outline-none focus:border-blue-500;
+  }
+  .confirm-btn {
+    @apply xxs:w-1/2 xxs:h-12 xxs:my-8 xxs:rounded-md;
   }
 }

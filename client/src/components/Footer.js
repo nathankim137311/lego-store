@@ -5,8 +5,8 @@ import legoLogo from '../png/lego-star-wars-logo.png'
 
 export default function Footer() {
   return (
-      <footer className='xxs:w-auto xxs:p-4 xxs:text xxs:bg-blue-900 text-white'>
-          <div className='xxs:flex xxs:flex-col'>
+      <footer className='xxs:w-auto xxs:text xxs:py-4 xxs:bg-blue-900 text-white'>
+          <div className='xxs:flex xxs:flex-col xxs:mx-4 lg:mx-6 2xl:max-w-8xl 2xl:mx-auto'>
             <img className='xxs:block xxs:w-48 xxs:h-auto xxs:mb-4 xxs:mt-4'src={legoLogo} alt="" />
             <h3 className='xxs:text-xl xxs:my-2'>Follow Us</h3>
             <ul className='xxs:flex xxs:flex-row xxs:my-4'>

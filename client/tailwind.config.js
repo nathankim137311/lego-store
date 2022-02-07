@@ -10,7 +10,7 @@ module.exports = {
   theme: {
     fontSize: {
       'xxs': '.5rem',
-      'xs': '.75rem',      
+      'xs': '.65rem',      
       'sm': '.875rem',          
       'base': '1rem',      
       'lg': '1.125rem',      
@@ -32,11 +32,25 @@ module.exports = {
     screens: {
       'xxs': '320px',
       'xs': '575px', 
+      'smd': '500px',
       ...defaultTheme.screens,
     },
     extend: {
       lineHeight: {
         '12': '3rem',
+      },
+      maxWidth: {
+        '8xl': '96rem',
+      },
+      width: {
+        '124': '31rem',
+        '384': '96rem',
+      },
+      maxHeight: {
+        '152': '38rem',
+      },
+      height: {
+        '152': '38rem',
       }
     },
   },

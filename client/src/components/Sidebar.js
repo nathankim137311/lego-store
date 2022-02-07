@@ -32,7 +32,7 @@ export default function Sidebar( props ) {
                         <Link className='text-sm' to='/shop'>SHOP</Link>
                     </li>
                     <li className='sidebar-link'>
-                        <Link className='text-sm' to='/watchlist'>WATCHLIST</Link>
+                        <Link className='text-sm' to='/dashboard'>DASHBOARD</Link>
                     </li>
                     <li className='sidebar-link'>
                         <Link className='text-sm' to='/contact'>CONTACT</Link>

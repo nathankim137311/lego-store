@@ -1,20 +1,36 @@
 require('dotenv').config()
 const express = require('express');
-const cors = require("cors")
+const cors = require("cors");
+const mongoose = require('mongoose');
+
 const app = express(); 
-const PORT = 3000; 
+const PORT = 3001; 
 const path = __dirname + '/views/';
-
-app.use(express.json());
-app.use(cors());
-app.use(express.static(path));
-
+const bodyParser = require('body-parser');
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY); 
 
+//Import Routes 
+const authRoute = require('./routes/auth');
+const dashboardRoute = require('./routes/dashboard');
+
+// Middlewares
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.static(path));
+
+// Route Middlewares
+app.use('/api/user', authRoute);
+app.use('/api', dashboardRoute);
+
+mongoose.connect(process.env.DB_CONNECT, () => console.log('connected to mongodb'));
+
+// Get home page 
 app.get('/', (req, res) => {
     res.sendFile(path + 'index.html');
 });
 
+// Create checkout session 
 app.post('/create-checkout-session', async (req, res) => {
     try {
         const session = await stripe.checkout.sessions.create({
