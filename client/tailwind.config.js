@@ -32,6 +32,7 @@ module.exports = {
     screens: {
       'xxs': '320px',
       'xs': '575px', 
+      'smd': '500px',
       ...defaultTheme.screens,
     },
     extend: {
@@ -43,6 +44,7 @@ module.exports = {
       },
       width: {
         '124': '31rem',
+        '384': '96rem',
       },
       maxHeight: {
         '152': '38rem',
