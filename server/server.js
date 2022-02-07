@@ -2,9 +2,20 @@ require('dotenv').config()
 const express = require('express');
 const cors = require("cors");
 const mongoose = require('mongoose');
+const path = require('path');
 
 const app = express(); 
-const PORT = 3001; 
+
+if (process.env.NODE_ENV === 'production') {
+    // Set static folder
+    app.use(express.static('client/build'));
+
+    app.get('*', (req, res) => {
+        res.sendFile(path.resolve('client', 'build', 'index.html')); // fix
+    });
+}
+
+const PORT = 3001 || process.env.PORT; 
 const path = __dirname + '/views/';
 const bodyParser = require('body-parser');
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY); 
