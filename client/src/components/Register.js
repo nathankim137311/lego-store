@@ -209,7 +209,7 @@ export default function Register() {
             <div className='md:border-4 md:border-white md:w-fit md:mx-auto'>
                 <AccountHeader />
                 <div className='xxs:bg-gray-100 xxs:px-4 md:w-124 md:px-8'>
-                    <div className='xxs:mt-14'>
+                    <div className='xxs:mt-8'>
                         <h1 className='xxs:text-xl xxs:text-center xxs:px-4 xxs:py-4 sm:py-8'>Create your adult LEGO Account</h1>
                         <div className='xxs:w-full xxs:flex xxs:flex-col xxs:items-center xxs:mt-4'>
                             <span className='xxs:text-sm' >Already have an account?</span>
@@ -512,7 +512,7 @@ export default function Register() {
 
 const AccountHeader = () => {
     return (
-        <header className='xxs:absolute xxs:top-0 xxs:w-full xxs:bg-yellow-300 xxs:flex xxs:flex-row xxs:justify-center xxs:items-center xxs:py-3 md:w-124 md:mx-auto'>
+        <header className='xxs:relative xxs:w-full xxs:bg-yellow-300 xxs:flex xxs:flex-row xxs:justify-center xxs:items-center xxs:py-3 md:w-124 md:mx-auto'>
             <img className='xxs:mr-4 xxs:h-8 md:h-10' src={legoLogo} alt="lego logo" />
             <h1 className='xxs:text-xl xxs:font-bold xxs:tracking-wide md:text-2xl'>Account</h1>
         </header>
@@ -537,7 +537,7 @@ const SocialMediaAccounts = () => {
 
 export const PrivacyCookies = () => {
     return (
-        <div className='fixed bottom-0 right-5 bg-slate-100 border-1 border-gray-300 px-2 rounded-t-lg'>
+        <div className='fixed bottom-0 right-5 bg-slate-100 border-1 border-gray-300 px-2 rounded-t-lg md:hidden'>
             <span className='text-xs text-blue-500'>
                 <Link to='#'>
                     Privacy Policy | Cookies

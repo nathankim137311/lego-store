@@ -63,7 +63,7 @@ export default function Home() {
             <img className='w-full h-full sm:object-cover sm:object-left' src={darthVader} alt="Darth Vader and Luke Skywalker dueling on Cloud City" />
           </div>
           <div className='xxs:flex xxs:flex-col xxs:items-center xxs:bg-black xxs:text-white xxs:py-6 xxs:px-10 xxs:w-auto sm:w-2/5'>
-            <h3 className='xxs:w-full xxs:text-center xxs:pb-4 xxs:text-lg xl:text-2xl'>LEGO® Star Wars™: This is how we play!</h3>
+            <h3 className='xxs:w-full xxs:text-center xxs:pb-4 xxs:text-lg xl:text-2xl xl:mt-10'>LEGO® Star Wars™: This is how we play!</h3>
             <p className='xxs:text-center xxs:text-sm sm:text-left xl:w-4/5 xl:text-left xl:text-lg xl:py-6'>Playing can go beyond building. Step outside of the expected and create your own LEGO® Star Wars™ masterpieces. Whether you’re an inspiring painter, a photographer or a filmmaker, you can make your own out-of-this-galaxy creations.</p>
             <button className='xxs:h-10 xxs:bg-white xxs:text-black xxs:w-1/2 xxs:mt-6 xxs:rounded hover:bg-black hover:text-white sm:w-full xl:w-4/5 xl:text-lg'>Learn more {'>'}</button>
           </div>
