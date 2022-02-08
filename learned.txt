@@ -7,3 +7,16 @@ set width and height to 100% and add object-fit: contain
 
 // smallest screen size to develop for 
 exactly 320px 
+
+// reflection on deployment of v1 of making a lego clone 
+    start the project with deployment first
+
+// hardships 
+    deploying project to heroku after completion 
+        best practice is to start the project with deployment 
+    organizing server and client directories
+    tailwind media queries 
+        design for mobile first 
+    bad api design required a lot of configuration 
+        png from my api were of low quality had to use regex to convert to high-quality 
+    

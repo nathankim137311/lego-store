@@ -43,6 +43,9 @@ export default function Dashboard() {
             if (token) {
                 const decoded = jwt_decode(token);
                 if (decoded) authorizeUser();
+            } else {
+                setIsLoading(true);
+                navigate('/login');
             }
         }
 

@@ -88,3 +88,36 @@ block users from accessing features if you are not signed up or logged in.
 
 username: mikeadossi@gmail.com, password: tw83#r!HHp
 
+// fix cart page media query for desktop 
+    text/font-size a bit too small for desktop
+
+// add success and cancel pages after stripe payment
+    add react components for success and cancel pages to react routing
+
+// forgot password functionality for login and register pages
+    send user an email to confirm and go to reset password form 
+        mailchimp or some sort of library
+
+// add some user details for dashboard
+    shipping details
+    display user's name, email, and password
+    ability to change password
+        put to server and update user password
+    buttons and links work and route to different pages
+        these routes will be protected and will require JWT 
+
+// replace localStorage to cookies
+    localStorage is not secure (people would say)
+
+// optimize website to load faster 
+    images to load faster 
+    http requests to run faster 
+
+// replace loading... with animated spanners
+    some sort of library
+
+// fix image slider
+    the dots representing the number of pictures break page layout
+
+// fix routing for dasboard page
+
