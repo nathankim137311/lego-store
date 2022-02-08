@@ -27,7 +27,7 @@ app.use('/api', dashboardRoute);
 mongoose.connect(process.env.DB_CONNECT, () => console.log('connected to mongodb'));
 
 // Get home page 
-app.get('/', (req, res) => {
+app.get('/*', (req, res) => {
     res.sendFile(path + 'index.html');
 });
 

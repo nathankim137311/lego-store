@@ -12,7 +12,7 @@ export default function Dashboard() {
 
     const authorizeUser = async () => {
         try {
-            const response = await fetch('https://lego-clone.herokuapp.com/api/dashboard', {
+            const response = await fetch('/api/dashboard', {
                 method: 'GET',
                 headers: {
                     'x-access-token': localStorage.getItem('token'),
