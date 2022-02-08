@@ -15,6 +15,8 @@ export default function Login() {
     const [errorMsg, setErrorMsg] = useState(''); 
     // Form success
     const [successMsg, setSuccessMsg] = useState('');
+    // Loading 
+    const [isLoading, setIsLoading] = useState(false); 
 
     let navigate = useNavigate();
 
@@ -45,6 +47,7 @@ export default function Login() {
                 });
                 localStorage.setItem('token', data.token); // store token in localStorage
                 setSuccessMsg('Successfully logged in!');
+                setIsLoading(true);
                 setTimeout(() => {
                     navigate('/dashboard');
                 }, 3000);
@@ -65,6 +68,14 @@ export default function Login() {
         } catch(err) {
             console.log(err);
         }
+    }
+
+    if (isLoading) {
+        return (
+          <div className='xxs:absolute xxs:left-1/2 xxs:top-1/2 xxs:-translate-x-1/2 xxs:-translate-y-1/2'>
+              <h1>Loading...</h1>
+          </div>
+        );
     }
 
     return (

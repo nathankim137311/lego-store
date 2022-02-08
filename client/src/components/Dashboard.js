@@ -45,7 +45,9 @@ export default function Dashboard() {
                 if (decoded) authorizeUser();
             } else {
                 setIsLoading(true);
-                navigate('/login');
+                setTimeout(() => {
+                    navigate('/login');
+                }, 3000);
             }
         }
 
@@ -55,7 +57,7 @@ export default function Dashboard() {
     if (isLoading) {
         return (
             <div className='xxs:absolute xxs:top-1/2 xxs:left-1/2 xxs:-translate-y-1/2 xxs:-translate-x-1/2 xxs:px-4'>
-                <h1 className='xxs:font-bold xxs:text-3xl xxs:text-center'>Login credentials invalid.</h1>
+                <h1 className='xxs:font-bold xxs:text-2xl xxs:text-center'>Login credentials invalid.</h1>
             </div>
         )
     }
@@ -64,7 +66,7 @@ export default function Dashboard() {
         <>
             <div className='xxs:px-4 xxs:mt-14 sm:mt-20 sm:max-w-5xl sm:mx-auto'>
                 <div className='xxs:py-2'>
-                    <span className='xxs:text-sm'><Link className='xxs:text-blue-500' to='/home'>Home</Link> {'>'} My Dashboard</span>
+                    <span className='xxs:text-sm'><Link className='xxs:text-blue-500' to='/'>Home</Link> {'>'} My Dashboard</span>
                 </div>
                 <h1 className='xxs:text-xl xxs:my-4'>My Dashboard</h1>
                 <LegoVipCard />

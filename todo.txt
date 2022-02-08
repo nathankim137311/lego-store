@@ -121,3 +121,5 @@ username: mikeadossi@gmail.com, password: tw83#r!HHp
 
 // fix routing for dasboard page
 
+// fix and catch error when user manipulates token in localstorage
+
