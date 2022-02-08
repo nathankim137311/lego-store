@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/static/css/main.0b384a37.css",
+    "main.js": "/static/js/main.62b1ce33.js",
+    "static/media/legoBusinessMan.png": "/static/media/legoBusinessMan.7d5513b12b7869640861.png",
+    "static/media/boxerMinifig.png": "/static/media/boxerMinifig.6c541b64b1178f29d5dc.png",
+    "static/media/darthvader.jpg": "/static/media/darthvader.0a560acdaf3ea84e1496.jpg",
+    "static/media/lego-star-wars-logo.png": "/static/media/lego-star-wars-logo.e4bef10b97dc516c6dc0.png",
+    "static/media/starwars-logo.png": "/static/media/starwars-logo.e1c386f5c1159f9a3e5b.png",
+    "static/media/Lego-logo.png": "/static/media/Lego-logo.b732affac2b09d46a52f.png",
+    "index.html": "/index.html",
+    "main.0b384a37.css.map": "/static/css/main.0b384a37.css.map",
+    "main.62b1ce33.js.map": "/static/js/main.62b1ce33.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.0b384a37.css",
+    "static/js/main.62b1ce33.js"
+  ]
+}
