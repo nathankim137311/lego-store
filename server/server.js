@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const app = express(); 
 
 const PORT = 3001 || process.env.PORT; 
-const path = __dirname + '/views/';
+const path = require('path');
 const bodyParser = require('body-parser');
 const stripe = require('stripe')(process.env.STRIPE_PRIVATE_KEY); 
 
@@ -15,6 +15,7 @@ const authRoute = require('./routes/auth');
 const dashboardRoute = require('./routes/dashboard');
 
 // Middlewares
+app.use(express.static(path.resolve(__dirname, '../client/build')));
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -25,11 +26,6 @@ app.use('/api/user', authRoute);
 app.use('/api', dashboardRoute);
 
 mongoose.connect(process.env.DB_CONNECT, () => console.log('connected to mongodb'));
-
-// Get home page 
-app.get('/*', (req, res) => {
-    res.sendFile(path + 'index.html');
-});
 
 // Create checkout session 
 app.post('/create-checkout-session', async (req, res) => {
