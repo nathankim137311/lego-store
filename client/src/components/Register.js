@@ -183,7 +183,7 @@ export default function Register() {
                     country,
                 }
     
-                const response = await fetch('http://localhost:3001/api/user/register', {
+                const response = await fetch('https://lego-clone.herokuapp.com/api/user/register', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json', 
