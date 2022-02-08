@@ -46,6 +46,34 @@ export default function CartPage() {
         total();
     }, [bag, isShipping, orderValue]);
 
+    const redirectToCheckout = () => {
+        // items for checkout 
+        const newBag = [...bag];
+        newBag.push({
+            set: 'Shipping',
+            images: [],
+            price: isShipping ? 0 : 9,
+            quantity: 1, 
+        });
+
+        fetch('/api/stripe-checkout', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                items: newBag,
+            })
+        }).then(res => {
+            if (res.ok) return res.json();
+            return res.json().then(json => Promise.reject(json))
+        }).then(({ url }) => {
+            window.location = url
+        }).catch(e => {
+            console.error(e.error);
+        });
+    }
+
     return (
         <div className='bg-gray-100'>
             <h1 className='xxs:pt-24 xxs:w-full xxs:px-2 sm:px-4 lg:mx-6 2xl:mx-auto 2xl:max-w-8xl' >My Bag ({totalItems})</h1>
@@ -65,12 +93,18 @@ export default function CartPage() {
                     <FreeShippingCard isShipping={isShipping} />
                     <OrderSummary totalItems={totalItems} orderValue={orderValue} isShipping={isShipping} cartTotal={cartTotal} />
                     <div className='xxs:hidden sm:flex sm:flex-col sm:items-center sm:bg-white sm:mx-2 sm:py-4 sm:mb-8 lg:mb-12'>
-                        <button className='sm:my-2 sm:h-10 sm:w-4/5 sm:bg-orange-400 sm:rounded-md hover:bg-white hover:border-2 hover:border-orange-400 lg:h-12'>Express Checkout</button>
-                        <button className='sm:my-2 sm:h-10 sm:w-4/5 sm:bg-blue-600 sm:text-white sm:rounded-md hover:bg-white hover:border-2 hover:border-blue-600 hover:text-black lg:h-12'>Checkout</button>
+                        <button 
+                        className='sm:my-2 sm:h-10 sm:w-4/5 sm:bg-orange-400 sm:rounded-md hover:bg-white hover:border-2 hover:border-orange-400 lg:h-12'
+                        onClick={redirectToCheckout}
+                        >Express Checkout</button>
+                        <button 
+                        className='sm:my-2 sm:h-10 sm:w-4/5 sm:bg-blue-600 sm:text-white sm:rounded-md hover:bg-white hover:border-2 hover:border-blue-600 hover:text-black lg:h-12'
+                        onClick={redirectToCheckout}
+                        >Checkout</button>
                     </div>
                 </div>
             </div>
-            <CheckoutCard cartTotal={cartTotal} bag={bag} isShipping={isShipping} />
+            <CheckoutCard cartTotal={cartTotal} redirect={redirectToCheckout} />
             <Navbar />
             <Footer />
         </div>
@@ -232,33 +266,7 @@ const FreeShippingCard = ({ isShipping }) => {
     } else return null
 }
 
-const CheckoutCard = ({ cartTotal, bag, isShipping }) => {
-    const newBag = [...bag];
-    newBag.push({
-        set: 'Shipping',
-        images: [],
-        price: isShipping ? 0 : 9,
-        quantity: 1, 
-    });
-
-    const redirectToCheckout = () => {
-        fetch('/create-checkout-session', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                items: newBag,
-            })
-        }).then(res => {
-            if (res.ok) return res.json();
-            return res.json().then(json => Promise.reject(json))
-        }).then(({ url }) => {
-            window.location = url
-        }).catch(e => {
-            console.error(e.error);
-        });
-    }
+const CheckoutCard = ({ cartTotal, redirect }) => {
 
     return (
         <div className='xxs:fixed xxs:bottom-0 xxs:flex xxs:flex-col xxs:p-2 xxs:bg-white xxs:w-full xxs:border-t-1 xxs:border-gray-300 sm:hidden'>
@@ -267,9 +275,11 @@ const CheckoutCard = ({ cartTotal, bag, isShipping }) => {
                 <span className='xxs:font-semibold'>${Math.round(cartTotal * 100) / 100}</span>
             </div>
             <div className='xxs:flex xxs:flex-row xxs:justify-between xxs:mt-4'>
-                <button className='xxs:h-12 xxs:w-1/2 xxs:bg-blue-600 xxs:text-white xxs:text-center xxs:rounded-md xxs:mr-2 hover:text-black hover:bg-white hover:border-2 hover:border-blue-600 '>Express Checkout</button>
+                <button className='xxs:h-12 xxs:w-1/2 xxs:bg-blue-600 xxs:text-white xxs:text-center xxs:rounded-md xxs:mr-2 hover:text-black hover:bg-white hover:border-2 hover:border-blue-600 '
+                onClick={redirect}
+                >Express Checkout</button>
                 <button className='xxs:h-12 xxs:w-1/2 xxs:bg-orange-400 xxs:rounded-md xxs:ml-2 hover:bg-white hover:border-2 hover:border-orange-400'
-                onClick={redirectToCheckout}
+                onClick={redirect}
                 >Checkout</button>
             </div>
         </div>
