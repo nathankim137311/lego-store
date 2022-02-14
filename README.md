@@ -1,6 +1,9 @@
 # [Lego Clone](lego-clone.herokuapp.com/)
 
-## Video demos
+## Description
+A clone of the Lego.com which features: authentication / authorization with JWT, mobile-responsive design, a functional shopping cart, Stripe-Integration and multiple pages of navigation. 
+
+## Demos
 
 ### Home, Shop, and Product pages
 ![home](https://user-images.githubusercontent.com/46698958/153802036-d51ff778-c61b-4a01-80e9-456866d4466e.gif)
@@ -11,8 +14,8 @@
 ### Login and Register
 ![login](https://user-images.githubusercontent.com/46698958/153802058-e370580b-02f0-4fae-8c04-c0cb602b7ea8.gif)
 
-## Description
-A clone of the Lego.com which features: authentication / authorization with JWT, mobile-responsive design, a functional shopping cart, Stripe-Integration and multiple pages of navigation. 
+### Responsive design
+![responsive](https://user-images.githubusercontent.com/46698958/153802836-1c8cc764-6aac-4735-8967-237ed66a452b.gif)
 
 ## Features
 * Shopping Cart
