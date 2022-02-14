@@ -11,14 +11,20 @@ A clone of the Lego.com which features: authentication / authorization with JWT,
 * Routing / navigation 
 
 ## Technologies
-* MongoDB
+![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white)
+
+### Why these technologies?
+
+### MongoDB
   * I used MongoDB because it is a non-relational database, the data I was storing was not very complex and is not relational. 
-* Express
+### Express
   * I used Express because of the simplicity of setting up a server, and creating routing components 
-* React
+### React
   * I used React because the component-based architecture allowed for greater ease when it came to building UIs. Managing states with React is a lot easier and robust than just using vanilla JavaScript. 
-* Node
+### Node
   * I used Node because I wanted to use JavaScript as my back-end language :smile:
+### Tailwind CSS
+  * I used Tailwind because it works well with React and it allowed for faster development.
 
 ## Questions
 
